@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta
     name="description"
-    content="KSRAudio는 오디오 및 동영상 파일의 오디오를 재생·편집하고, 속도·피치·10밴드 EQ 조절, 보컬 제거, 편집본 저장, 오버더빙 녹음을 지원하는 안드로이드 오디오 앱입니다."
+    content="KSRAudio는 오디오 및 동영상 파일의 오디오를 재생·편집하고, 속도·피치·10밴드 EQ 조절, 보컬 제거, 오버더빙, SMB·FTP·SFTP 원격 파일 처리와 결과물 공유를 지원하는 안드로이드 오디오 앱입니다."
   />
   <meta name="theme-color" content="#111827" />
 
@@ -524,6 +524,10 @@
             KSRAudio는 오디오 파일과 동영상 파일에 포함된 오디오를 처리할 수 있는
             안드로이드 오디오 앱입니다. 속도와 피치를 변경하고, 10밴드 EQ로 음색을
             조절하며, 보컬 제거와 오버더빙 녹음 기능까지 하나의 앱에서 제공합니다.
+            또한 SMB, FTP, SFTP 서버의 오디오 및 동영상 파일을 직접 불러와 재생하고,
+            편집하거나 보컬 제거 작업을 수행할 수 있습니다. 생성된 편집본, 보컬 제거본,
+            오버더빙 결과물은 앱 내부 저장소에 저장되며 공유 기능을 통해 카카오톡 등
+            다른 앱이나 기기로 전달할 수 있습니다.
           </p>
 
           <div class="hero-actions">
@@ -570,8 +574,8 @@
         <div class="section-heading">
           <h2>KSRAudio의 주요 기능</h2>
           <p>
-            다양한 형식의 미디어를 재생하고, 원하는 소리로 편집한 뒤 새로운 오디오
-            파일로 저장할 수 있습니다.
+            로컬 저장소와 SMB, FTP, SFTP 서버의 미디어를 재생하고, 원하는 소리로
+            편집한 뒤 새로운 오디오 파일로 저장하고 다른 앱이나 기기로 공유할 수 있습니다.
           </p>
         </div>
 
@@ -638,6 +642,35 @@
               사용할 수 있습니다.
             </p>
           </article>
+
+
+          <article class="feature-card">
+            <div class="feature-icon">NET</div>
+            <h3>SMB·FTP·SFTP 원격 파일 지원</h3>
+            <p>
+              SMB, FTP, SFTP를 통해 원격 서버의 오디오 및 동영상 파일을 불러와
+              재생하고, 속도·피치·EQ 편집과 보컬 제거 작업을 수행할 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">SAVE</div>
+            <h3>앱 내부 저장소에 결과 저장</h3>
+            <p>
+              편집된 오디오, 보컬 제거 결과물, 오버더빙 생성물은 앱 내부 저장소에
+              저장되어 다른 파일과 분리하여 관리할 수 있습니다.
+            </p>
+          </article>
+
+
+          <article class="feature-card">
+            <div class="feature-icon">SHARE</div>
+            <h3>파일 공유</h3>
+            <p>
+              앱 내부 저장소에 저장된 편집본, 보컬 제거본, 오버더빙 결과물을
+              공유 기능을 통해 카카오톡, 이메일 등 다른 앱이나 기기로 전달할 수 있습니다.
+            </p>
+          </article>
         </div>
       </div>
     </section>
@@ -646,14 +679,14 @@
       <div class="container">
         <div class="section-heading">
           <h2>간단한 사용 흐름</h2>
-          <p>파일을 선택하고, 원하는 소리로 조절한 뒤 재생하거나 저장합니다.</p>
+          <p>로컬 또는 원격 서버의 파일을 선택하고, 원하는 소리로 조절한 뒤 앱 내부 저장소에 저장합니다.</p>
         </div>
 
         <div class="workflow-grid">
           <article class="workflow-card">
             <span class="workflow-number">1</span>
             <h3>파일 선택</h3>
-            <p>오디오 파일 또는 동영상 파일을 불러옵니다.</p>
+            <p>로컬 저장소 또는 SMB, FTP, SFTP 서버에서 오디오·동영상 파일을 불러옵니다.</p>
           </article>
 
           <article class="workflow-card">
@@ -671,7 +704,7 @@
           <article class="workflow-card">
             <span class="workflow-number">4</span>
             <h3>재생 또는 저장</h3>
-            <p>처리된 결과를 들어보고 새로운 오디오 파일로 저장합니다.</p>
+            <p>처리된 결과를 앱 내부 저장소에 저장한 뒤 카카오톡 등 다른 앱이나 기기로 공유합니다.</p>
           </article>
         </div>
       </div>
@@ -691,8 +724,10 @@
               녹음을 하나의 앱에서 처리할 수 있도록 개발되고 있습니다.
             </p>
             <p>
-              다양한 미디어 형식을 지원하고, 백그라운드 재생과 오디오 처리 기능을
-              통해 모바일 환경에서도 편리한 작업 흐름을 제공합니다.
+              다양한 미디어 형식을 지원하며, SMB, FTP, SFTP를 통한 원격 파일 재생과
+              편집도 제공합니다. 편집본, 보컬 제거 결과물, 오버더빙 생성물은 앱 내부
+              저장소에 저장되며, 공유 기능을 이용해 카카오톡 등 다른 앱이나 기기로
+              전달할 수 있습니다.
             </p>
             <p>
               일부 기능과 지원 형식은 기기, Android 버전 및 앱 버전에 따라 달라질
