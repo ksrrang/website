@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="KSRAudio는 오디오 및 동영상 파일의 오디오를 재생·편집하고, 속도·피치·10밴드 EQ 조절, 보컬 제거, 편집본 저장, 오버더빙 녹음을 지원하는 안드로이드 오디오 앱입니다."
+  />
+  <meta name="theme-color" content="#111827" />
+
+  <meta property="og:title" content="KSRAudio | 오디오 재생·편집·보컬 제거" />
+  <meta
+    property="og:description"
+    content="속도·피치·10밴드 EQ 조절, 보컬 제거, 편집본 저장, 오버더빙 녹음을 하나의 앱에서 제공합니다."
+  />
+  <meta property="og:type" content="website" />
+
+  <title>KSRAudio | 오디오 재생·편집·보컬 제거</title>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-dark: #111827;
+      --text: #182033;
+      --muted: #667085;
+      --primary: #5b5ce2;
+      --primary-dark: #4546c8;
+      --border: #e5e7eb;
+      --accent: #e9eafe;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.88);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.85);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg, #6567e8, #8b5cf6);
+      box-shadow: 0 9px 22px rgba(91, 92, 226, 0.28);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 104px 0 84px;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(139, 92, 246, 0.18), transparent 26%),
+        radial-gradient(circle at 20% 25%, rgba(91, 92, 226, 0.13), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: center;
+      gap: 68px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border: 1px solid #dfe1ff;
+      border-radius: 999px;
+      color: var(--primary-dark);
+      background: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(2.55rem, 6vw, 4.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 21px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      font-weight: 750;
+      transition: 0.2s ease;
+    }
+
+    .button-primary {
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 12px 24px rgba(91, 92, 226, 0.25);
+    }
+
+    .button-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      border-color: var(--border);
+      background: #fff;
+    }
+
+    .button-secondary:hover {
+      border-color: #c8c9f8;
+      color: var(--primary);
+    }
+
+    .app-preview {
+      position: relative;
+      width: min(390px, 100%);
+      margin-inline: auto;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 34px;
+      background: rgba(17, 24, 39, 0.96);
+      box-shadow: var(--shadow);
+    }
+
+    .preview-screen {
+      min-height: 490px;
+      padding: 28px;
+      border-radius: 24px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 75% 20%, rgba(139, 92, 246, 0.45), transparent 28%),
+        linear-gradient(145deg, #202946, #111827 66%);
+    }
+
+    .preview-label {
+      color: #c7cbff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .preview-title {
+      margin: 16px 0 4px;
+      font-size: 2rem;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .preview-subtitle {
+      margin: 0;
+      color: #b6bdcc;
+    }
+
+    .waveform {
+      display: flex;
+      height: 112px;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 42px 0 28px;
+    }
+
+    .waveform span {
+      width: 5px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #b7a4ff, #6467e8);
+    }
+
+    .waveform span:nth-child(1) { height: 28px; }
+    .waveform span:nth-child(2) { height: 48px; }
+    .waveform span:nth-child(3) { height: 78px; }
+    .waveform span:nth-child(4) { height: 54px; }
+    .waveform span:nth-child(5) { height: 96px; }
+    .waveform span:nth-child(6) { height: 66px; }
+    .waveform span:nth-child(7) { height: 106px; }
+    .waveform span:nth-child(8) { height: 58px; }
+    .waveform span:nth-child(9) { height: 84px; }
+    .waveform span:nth-child(10) { height: 42px; }
+    .waveform span:nth-child(11) { height: 70px; }
+    .waveform span:nth-child(12) { height: 32px; }
+
+    .control-card {
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .control-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 9px 0;
+      color: #c9cfdb;
+    }
+
+    .control-row strong {
+      color: #fff;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 38px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      margin: 15px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      min-height: 240px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.045);
+    }
+
+    .feature-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 24px;
+      border-radius: 15px;
+      color: var(--primary);
+      background: var(--accent);
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .workflow {
+      background: var(--surface-dark);
+      color: #fff;
+    }
+
+    .workflow .section-heading p {
+      color: #aeb6c7;
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .workflow-card {
+      padding: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .workflow-number {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      margin-bottom: 24px;
+      border-radius: 50%;
+      color: #141728;
+      background: #bec0ff;
+      font-weight: 900;
+    }
+
+    .workflow-card h3 {
+      margin: 0 0 10px;
+    }
+
+    .workflow-card p {
+      margin: 0;
+      color: #aeb6c7;
+    }
+
+    .about-panel {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 42px;
+      padding: 46px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .about-panel h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -0.04em;
+    }
+
+    .about-panel p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+
+    .site-footer {
+      padding: 34px 0;
+      color: #9aa3b4;
+      background: #0b1020;
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .about-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 74px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .workflow-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .app-preview {
+        margin-top: 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .nav {
+        min-height: 64px;
+      }
+
+      .nav-links a:not(:last-child) {
+        display: none;
+      }
+
+      .hero {
+        padding: 62px 0 60px;
+      }
+
+      section {
+        padding: 66px 0;
+      }
+
+      .feature-grid,
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-panel {
+        padding: 30px 24px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="KSRAudio 홈">
+        <span class="brand-mark">K</span>
+        <span>KSRAudio</span>
+      </a>
+
+      <nav class="nav-links" aria-label="주요 메뉴">
+        <a href="#features">주요 기능</a>
+        <a href="#workflow">사용 흐름</a>
+        <a href="#about">소개</a>
+        <a href="mailto:support@ksrrang.com">문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Android Audio Player & Editor</span>
+          <h1>재생부터 편집, 보컬 제거와 오버더빙까지</h1>
+
+          <p class="hero-copy">
+            KSRAudio는 오디오 파일과 동영상 파일에 포함된 오디오를 처리할 수 있는
+            안드로이드 오디오 앱입니다. 속도와 피치를 변경하고, 10밴드 EQ로 음색을
+            조절하며, 보컬 제거와 오버더빙 녹음 기능까지 하나의 앱에서 제공합니다.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#features">기능 살펴보기</a>
+            <a class="button button-secondary" href="mailto:support@ksrrang.com">
+              지원 문의
+            </a>
+          </div>
+        </div>
+
+        <div class="app-preview" aria-label="KSRAudio 기능 미리보기">
+          <div class="preview-screen">
+            <span class="preview-label">KSRAudio</span>
+            <h2 class="preview-title">Your audio,<br />your way.</h2>
+            <p class="preview-subtitle">Play · Edit · Separate · Record</p>
+
+            <div class="waveform" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+            </div>
+
+            <div class="control-card">
+              <div class="control-row">
+                <span>Speed</span>
+                <strong>100%</strong>
+              </div>
+              <div class="control-row">
+                <span>Pitch</span>
+                <strong>0 semitone</strong>
+              </div>
+              <div class="control-row">
+                <span>Equalizer</span>
+                <strong>10 bands</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-heading">
+          <h2>KSRAudio의 주요 기능</h2>
+          <p>
+            다양한 형식의 미디어를 재생하고, 원하는 소리로 편집한 뒤 새로운 오디오
+            파일로 저장할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">▶</div>
+            <h3>오디오 및 동영상 오디오 재생</h3>
+            <p>
+              오디오 파일뿐 아니라 동영상 파일에 포함된 오디오도 불러와 재생하고
+              처리할 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">↕</div>
+            <h3>속도 및 피치 조절</h3>
+            <p>
+              재생 속도와 음높이를 각각 조절하여 음악 연습, 청취, 콘텐츠 제작 등
+              다양한 목적에 맞게 사용할 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">EQ</div>
+            <h3>10밴드 이퀄라이저</h3>
+            <p>
+              저음부터 고음까지 10개 주파수 대역을 세밀하게 조절해 원하는 음색을
+              만들 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">AI</div>
+            <h3>보컬 제거 및 저장</h3>
+            <p>
+              음악에서 보컬 성분을 줄이거나 제거하여 반주 중심의 오디오로 만들고
+              별도 파일로 저장할 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">⇩</div>
+            <h3>편집 결과 저장</h3>
+            <p>
+              속도, 피치, EQ 설정이 적용된 오디오를 새로운 파일로 저장하여 다른
+              앱이나 기기에서도 활용할 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">●</div>
+            <h3>오버더빙 녹음</h3>
+            <p>
+              반주를 들으면서 마이크로 보컬이나 연주를 녹음하고, 반주와 녹음음을
+              하나의 오디오로 합칠 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">♫</div>
+            <h3>오디오 플레이어</h3>
+            <p>
+              재생, 일시정지, 탐색, 반복 등 오디오 플레이어의 기본 기능을 편리하게
+              사용할 수 있습니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="workflow">
+      <div class="container">
+        <div class="section-heading">
+          <h2>간단한 사용 흐름</h2>
+          <p>파일을 선택하고, 원하는 소리로 조절한 뒤 재생하거나 저장합니다.</p>
+        </div>
+
+        <div class="workflow-grid">
+          <article class="workflow-card">
+            <span class="workflow-number">1</span>
+            <h3>파일 선택</h3>
+            <p>오디오 파일 또는 동영상 파일을 불러옵니다.</p>
+          </article>
+
+          <article class="workflow-card">
+            <span class="workflow-number">2</span>
+            <h3>소리 조절</h3>
+            <p>속도, 피치, 10밴드 EQ를 원하는 값으로 설정합니다.</p>
+          </article>
+
+          <article class="workflow-card">
+            <span class="workflow-number">3</span>
+            <h3>AI 및 녹음 기능</h3>
+            <p>필요에 따라 보컬 제거 또는 오버더빙 녹음을 실행합니다.</p>
+          </article>
+
+          <article class="workflow-card">
+            <span class="workflow-number">4</span>
+            <h3>재생 또는 저장</h3>
+            <p>처리된 결과를 들어보고 새로운 오디오 파일로 저장합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-panel">
+          <div>
+            <span class="eyebrow">About KSRAudio</span>
+            <h2>오디오를 더 자유롭게 다루는 방법</h2>
+          </div>
+
+          <div>
+            <p>
+              KSRAudio는 음악 감상, 노래와 악기 연습, 반주 제작, 오디오 편집 및
+              녹음을 하나의 앱에서 처리할 수 있도록 개발되고 있습니다.
+            </p>
+            <p>
+              다양한 미디어 형식을 지원하고, 백그라운드 재생과 오디오 처리 기능을
+              통해 모바일 환경에서도 편리한 작업 흐름을 제공합니다.
+            </p>
+            <p>
+              일부 기능과 지원 형식은 기기, Android 버전 및 앱 버전에 따라 달라질
+              수 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>KSRRang · KSRAudio</strong><br />
+        Android audio player and editor
+      </div>
+
+      <div class="footer-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="support.html">고객지원</a>
+        <a href="mailto:support@ksrrang.com">support@ksrrang.com</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
