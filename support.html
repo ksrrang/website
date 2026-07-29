@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="KSRAudio 고객지원 페이지입니다. 재생, 편집, 보컬 제거, 오버더빙, SMB·FTP·SFTP 연결, 파일 저장과 공유 관련 도움말을 제공합니다."
+  />
+  <meta name="theme-color" content="#111827" />
+  <title>고객지원 | KSRAudio</title>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --text: #182033;
+      --muted: #667085;
+      --primary: #5b5ce2;
+      --primary-dark: #4546c8;
+      --border: #e5e7eb;
+      --accent: #e9eafe;
+      --notice: #fff8e8;
+      --notice-border: #f3d48a;
+      --success: #edf9f1;
+      --success-border: #aad8b8;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .brand:hover {
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg, #6567e8, #8b5cf6);
+      box-shadow: 0 8px 20px rgba(91, 92, 226, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      color: inherit;
+    }
+
+    .hero {
+      padding: 82px 0 58px;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(139, 92, 246, 0.16), transparent 27%),
+        radial-gradient(circle at 12% 20%, rgba(91, 92, 226, 0.12), transparent 26%),
+        linear-gradient(180deg, #fff 0%, #f5f7fb 100%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 7px 13px;
+      border: 1px solid #dfe1ff;
+      border-radius: 999px;
+      color: var(--primary-dark);
+      background: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.45rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.055em;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 21px 0 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 21px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 12px 24px rgba(91, 92, 226, 0.23);
+    }
+
+    .button-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border-color: var(--border);
+      background: #fff;
+    }
+
+    main section.content {
+      padding: 42px 0 88px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .quick-card {
+      display: block;
+      padding: 23px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.045);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .quick-card:hover {
+      text-decoration: none;
+      transform: translateY(-3px);
+      border-color: #c8c9f8;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.09);
+    }
+
+    .quick-card:focus-visible {
+      outline: 3px solid rgba(91, 92, 226, 0.3);
+      outline-offset: 3px;
+    }
+
+    .quick-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--primary);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .quick-icon {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      color: var(--primary);
+      background: var(--accent);
+      font-weight: 900;
+    }
+
+    .quick-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.12rem;
+    }
+
+    .quick-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    article {
+      scroll-margin-top: 88px;
+      margin-top: 20px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    article h2 {
+      margin: 0 0 16px;
+      font-size: 1.55rem;
+      letter-spacing: -0.025em;
+    }
+
+    article h3 {
+      margin: 25px 0 8px;
+      font-size: 1.08rem;
+    }
+
+    article p {
+      margin: 0 0 13px;
+    }
+
+    ul,
+    ol {
+      margin: 10px 0 0;
+      padding-left: 23px;
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    details {
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: #fbfcfe;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 17px 19px;
+      cursor: pointer;
+      font-weight: 800;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] summary {
+      border-bottom: 1px solid var(--border);
+      background: #f7f8fc;
+    }
+
+    .answer {
+      padding: 18px 19px;
+      color: var(--muted);
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 20px 22px;
+      border: 1px solid var(--notice-border);
+      border-radius: 16px;
+      background: var(--notice);
+    }
+
+    .notice strong,
+    .success strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .success {
+      margin-top: 20px;
+      padding: 20px 22px;
+      border: 1px solid var(--success-border);
+      border-radius: 16px;
+      background: var(--success);
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 22px;
+      padding: 25px;
+      border-radius: 18px;
+      background: #f7f7ff;
+    }
+
+    .contact-box h3 {
+      margin: 0 0 6px;
+    }
+
+    .contact-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .back-link {
+      margin-top: 22px;
+      text-align: right;
+      font-weight: 800;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #f0f2f7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9em;
+    }
+
+    .site-footer {
+      padding: 32px 0;
+      color: #a2aabc;
+      background: #0b1020;
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: #c3c8d5;
+    }
+
+    @media (max-width: 760px) {
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        padding: 62px 0 46px;
+      }
+
+      article {
+        padding: 23px 19px;
+      }
+
+      .nav-links a:first-child {
+        display: none;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">K</span>
+        <span>KSRAudio</span>
+      </a>
+
+      <nav class="nav-links" aria-label="지원 페이지 메뉴">
+        <a href="#faq">자주 묻는 질문</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="index.html">홈으로</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Customer Support</span>
+        <h1>KSRAudio 고객지원</h1>
+        <p>
+          재생, 오디오 편집, 보컬 제거, 오버더빙, SMB·FTP·SFTP 연결,
+          결과 파일 저장과 공유 과정에서 문제가 발생한 경우 아래 안내를 확인하세요.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="mailto:support@ksrrang.com">
+            이메일 문의
+          </a>
+          <a class="button button-secondary" href="#faq">
+            자주 묻는 질문
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <div class="quick-grid">
+          <a class="quick-card" href="#playback-support">
+            <div class="quick-icon">▶</div>
+            <h2>재생 문제</h2>
+            <p>파일이 열리지 않거나 재생이 끊길 때 확인할 사항을 안내합니다.</p>
+            <span class="quick-link">관련 내용 보기 →</span>
+          </a>
+
+          <a class="quick-card" href="#remote-support">
+            <div class="quick-icon">NET</div>
+            <h2>원격 서버 연결</h2>
+            <p>SMB, FTP, SFTP 접속 실패와 네트워크 문제를 확인합니다.</p>
+            <span class="quick-link">관련 내용 보기 →</span>
+          </a>
+
+          <a class="quick-card" href="#storage-support">
+            <div class="quick-icon">SAVE</div>
+            <h2>저장 및 공유</h2>
+            <p>편집 결과의 저장 위치와 카카오톡 등으로 공유하는 방법을 안내합니다.</p>
+            <span class="quick-link">관련 내용 보기 →</span>
+          </a>
+        </div>
+
+        <article>
+          <h2>문의 전에 확인할 사항</h2>
+          <ol>
+            <li>KSRAudio를 최신 버전으로 업데이트합니다.</li>
+            <li>앱을 완전히 종료한 뒤 다시 실행합니다.</li>
+            <li>기기의 저장 공간과 네트워크 연결 상태를 확인합니다.</li>
+            <li>Android 설정에서 필요한 미디어·마이크·알림 권한을 확인합니다.</li>
+            <li>원격 서버를 사용하는 경우 다른 앱이나 PC에서도 접속 가능한지 확인합니다.</li>
+          </ol>
+
+          <div class="notice">
+            <strong>원본 파일 보관 권장</strong>
+            편집, 보컬 제거 또는 오버더빙 작업을 시작하기 전에 중요한 원본 파일은
+            별도의 위치에 백업하는 것을 권장합니다.
+          </div>
+        </article>
+
+        <article id="playback-support">
+          <h2>재생 문제 해결</h2>
+          <p>
+            로컬 또는 원격 오디오·동영상 파일이 열리지 않거나 재생이 끊길 때
+            다음 항목을 순서대로 확인하세요.
+          </p>
+          <ol>
+            <li>같은 파일이 다른 플레이어에서 정상 재생되는지 확인합니다.</li>
+            <li>파일이 완전히 복사되었고 손상되지 않았는지 확인합니다.</li>
+            <li>Android 설정에서 KSRAudio의 오디오·동영상 접근 권한을 확인합니다.</li>
+            <li>외장 저장장치 또는 파일 제공 앱에서 선택한 파일은 다시 선택해 봅니다.</li>
+            <li>원격 파일이면 Wi-Fi 신호와 서버 응답 상태를 확인합니다.</li>
+            <li>고해상도 또는 높은 비트레이트 파일은 다른 앱을 종료한 뒤 재생합니다.</li>
+          </ol>
+          <div class="notice">
+            <strong>지원 형식 관련</strong>
+            파일 확장자가 같아도 내부 코덱이 다를 수 있습니다. 특정 파일만 재생되지 않으면
+            문의 시 파일 확장자, 오디오·비디오 코덱, 파일 크기를 알려 주세요.
+          </div>
+          <p class="back-link"><a href="#top">맨 위로 ↑</a></p>
+        </article>
+
+        <article id="remote-support">
+          <h2>SMB·FTP·SFTP 연결 문제 해결</h2>
+          <p>
+            먼저 서버 주소, 포트, 계정정보와 네트워크 연결 상태를 확인하세요.
+            비밀번호나 개인키는 고객지원 이메일로 보내지 마세요.
+          </p>
+
+          <h3>공통 확인 항목</h3>
+          <ul>
+            <li>휴대전화에서 서버 주소로 접근 가능한 네트워크인지 확인합니다.</li>
+            <li>서버 주소에 프로토콜을 중복 입력하지 않았는지 확인합니다.</li>
+            <li>사용자 이름, 비밀번호, 포트 번호, 원격 경로를 다시 확인합니다.</li>
+            <li>서버 방화벽과 공유기의 포트 차단 여부를 확인합니다.</li>
+            <li>PC의 다른 클라이언트 프로그램으로 같은 계정이 접속되는지 확인합니다.</li>
+          </ul>
+
+          <h3>SMB</h3>
+          <ul>
+            <li>공유 폴더명과 계정의 읽기 권한을 확인합니다.</li>
+            <li>서버가 사용하는 SMB 버전과 인증 방식을 확인합니다.</li>
+            <li>로컬 네트워크에서는 서버 이름 대신 IP 주소로 시험해 봅니다.</li>
+          </ul>
+
+          <h3>FTP·SFTP</h3>
+          <ul>
+            <li>FTP와 SFTP는 서로 다른 프로토콜이므로 선택을 정확히 합니다.</li>
+            <li>기본 포트는 보통 FTP 21, SFTP 22이지만 서버 설정을 우선합니다.</li>
+            <li>SFTP 개인키 사용 시 키 형식과 서버 등록 상태를 확인합니다.</li>
+          </ul>
+          <p class="back-link"><a href="#top">맨 위로 ↑</a></p>
+        </article>
+
+        <article id="storage-support">
+          <h2>저장 및 공유 안내</h2>
+          <p>
+            속도·피치·EQ 편집본, 보컬 제거 결과물, 오버더빙 생성물은 앱 내부 저장소에
+            저장됩니다.
+          </p>
+
+          <h3>저장 파일 관리</h3>
+          <ul>
+            <li>앱의 저장 파일 또는 파일 관리 화면에서 결과물을 확인합니다.</li>
+            <li>저장 공간이 부족하면 작업이 실패할 수 있으므로 여유 공간을 확보합니다.</li>
+            <li>앱 삭제 또는 앱 데이터 초기화 시 내부 저장 파일도 삭제될 수 있습니다.</li>
+            <li>중요한 결과물은 공유 또는 내보내기를 통해 별도로 백업합니다.</li>
+          </ul>
+
+          <h3>카카오톡 등으로 공유</h3>
+          <ol>
+            <li>KSRAudio에서 저장된 결과 파일을 선택합니다.</li>
+            <li>공유 버튼을 누릅니다.</li>
+            <li>카카오톡, 이메일, 클라우드 저장소 등 전달할 앱을 선택합니다.</li>
+            <li>상대 앱에서 수신자 또는 저장 위치를 선택해 전송합니다.</li>
+          </ol>
+
+          <div class="notice">
+            <strong>공유가 실패하는 경우</strong>
+            파일 크기가 상대 앱의 전송 제한을 초과할 수 있습니다. 파일을 더 작은 크기로
+            저장하거나 클라우드 저장소에 올린 뒤 링크를 공유하세요.
+          </div>
+          <p class="back-link"><a href="#top">맨 위로 ↑</a></p>
+        </article>
+
+        <article id="faq">
+          <h2>자주 묻는 질문</h2>
+
+          <details>
+            <summary>오디오 또는 동영상 파일이 열리지 않습니다.</summary>
+            <div class="answer">
+              <p>
+                파일이 손상되었거나, 해당 파일의 코덱 또는 컨테이너 형식이 기기에서
+                지원되지 않을 수 있습니다. 다른 플레이어에서도 파일이 정상 재생되는지
+                확인하고, 파일 접근 권한이 허용되어 있는지 확인하세요.
+              </p>
+              <p>
+                외장 저장장치나 파일 관리자에서 선택한 파일은 Android의 파일 접근 권한이
+                만료되면 다시 선택해야 할 수 있습니다.
+              </p>
+            </div>
+          </details>
+
+          <details>
+            <summary>속도·피치·EQ가 적용된 파일은 어디에 저장됩니까?</summary>
+            <div class="answer">
+              <p>
+                편집본, 보컬 제거 결과물, 오버더빙 생성물은 KSRAudio의 앱 내부 저장소에
+                저장됩니다. 앱의 파일 관리 또는 저장 결과 화면에서 확인할 수 있습니다.
+              </p>
+              <p>
+                앱을 삭제하거나 앱 데이터를 초기화하면 내부 저장소의 파일도 삭제될 수
+                있으므로 중요한 결과물은 공유 또는 내보내기 기능으로 별도 보관하세요.
+              </p>
+            </div>
+          </details>
+
+          <details>
+            <summary>저장된 파일을 카카오톡이나 다른 기기로 보낼 수 있습니까?</summary>
+            <div class="answer">
+              <p>
+                네. 저장된 파일을 선택한 후 공유 기능을 실행하면 카카오톡, 이메일,
+                클라우드 저장소 등 Android 공유 기능을 지원하는 앱으로 전달할 수 있습니다.
+              </p>
+              <p>
+                파일 크기가 크면 상대 앱의 전송 용량 제한으로 인해 공유가 실패할 수 있습니다.
+                이 경우 클라우드 저장소나 다른 파일 전송 방식을 사용하세요.
+              </p>
+            </div>
+          </details>
+
+          <details>
+            <summary>SMB 서버에 연결되지 않습니다.</summary>
+            <div class="answer">
+              <ul>
+                <li>휴대전화와 SMB 서버가 같은 네트워크에 있는지 확인합니다.</li>
+                <li>서버 주소, 공유 폴더명, 사용자 이름과 비밀번호를 확인합니다.</li>
+                <li>공유 폴더에 해당 계정의 읽기 권한이 있는지 확인합니다.</li>
+                <li>공유기 또는 서버 방화벽이 SMB 연결을 차단하지 않는지 확인합니다.</li>
+                <li>서버가 지원하는 SMB 버전과 보안 설정을 확인합니다.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>FTP 또는 SFTP 서버에 연결되지 않습니다.</summary>
+            <div class="answer">
+              <ul>
+                <li>FTP와 SFTP는 서로 다른 방식이므로 프로토콜 선택을 확인합니다.</li>
+                <li>서버 주소와 포트를 확인합니다. 일반적으로 FTP는 21, SFTP는 22를 사용하지만 서버 설정에 따라 다를 수 있습니다.</li>
+                <li>사용자 이름, 비밀번호 또는 개인키가 정확한지 확인합니다.</li>
+                <li>모바일 네트워크나 공유기 방화벽에서 해당 포트가 차단되지 않았는지 확인합니다.</li>
+                <li>서버의 접속 로그를 확인하여 인증 실패 원인을 점검합니다.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>원격 파일 재생이 자주 끊깁니다.</summary>
+            <div class="answer">
+              <p>
+                네트워크 속도, 서버 응답 속도, Wi-Fi 신호, 파일 비트레이트에 따라 끊김이
+                발생할 수 있습니다. 5GHz Wi-Fi 또는 안정적인 유선 서버 연결을 사용하고,
+                백그라운드 다운로드나 다른 네트워크 작업을 줄여 보세요.
+              </p>
+            </div>
+          </details>
+
+          <details>
+            <summary>보컬 제거에 시간이 오래 걸립니다.</summary>
+            <div class="answer">
+              <p>
+                보컬 제거는 AI 연산을 사용하는 고부하 작업입니다. 파일 길이, 기기 성능,
+                배터리 절약 설정, 발열 상태에 따라 처리 시간이 달라질 수 있습니다.
+              </p>
+              <p>
+                처리 중에는 앱을 종료하지 말고, 배터리 잔량이 충분한 상태에서 작업하는
+                것을 권장합니다.
+              </p>
+            </div>
+          </details>
+
+          <details>
+            <summary>오버더빙에서 마이크 소리가 녹음되지 않습니다.</summary>
+            <div class="answer">
+              <ul>
+                <li>Android 설정에서 KSRAudio의 마이크 권한을 허용합니다.</li>
+                <li>다른 녹음 앱이나 통화 앱이 마이크를 사용 중인지 확인합니다.</li>
+                <li>Bluetooth 헤드셋 연결 시 입력 마이크가 달라질 수 있습니다.</li>
+                <li>기기의 마이크가 다른 녹음 앱에서 정상 작동하는지 확인합니다.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>백그라운드 재생이 중지됩니다.</summary>
+            <div class="answer">
+              <p>
+                제조사 배터리 절약 기능이 KSRAudio의 백그라운드 동작을 제한할 수 있습니다.
+                Android 설정의 배터리 메뉴에서 KSRAudio를 제한 없음 또는 최적화 제외로
+                설정하고, 알림 권한을 허용하세요.
+              </p>
+            </div>
+          </details>
+
+          <details>
+            <summary>앱 삭제 후 저장 파일이 사라졌습니다.</summary>
+            <div class="answer">
+              <p>
+                앱 내부 저장소에 있는 파일은 앱 삭제 또는 앱 데이터 초기화 시 함께 삭제될
+                수 있습니다. 중요한 파일은 삭제 전에 공유, 내보내기 또는 다른 저장소로
+                복사해야 합니다.
+              </p>
+            </div>
+          </details>
+        </article>
+
+        <article>
+          <h2>이메일 문의 방법</h2>
+          <p>
+            문제를 빠르게 확인할 수 있도록 이메일에 다음 정보를 함께 보내 주세요.
+          </p>
+
+          <ul>
+            <li>KSRAudio 앱 버전</li>
+            <li>휴대전화 제조사와 모델명</li>
+            <li>Android 버전</li>
+            <li>문제가 발생한 기능과 재현 순서</li>
+            <li>오류 메시지 또는 화면 캡처</li>
+            <li>파일 형식과 대략적인 크기</li>
+            <li>SMB·FTP·SFTP 문제인 경우 프로토콜과 포트 번호</li>
+          </ul>
+
+          <div class="success">
+            <strong>보안 정보는 보내지 마세요</strong>
+            원격 서버의 비밀번호, 개인키, 전체 접속 URL, 주민등록번호, 금융정보 등
+            민감한 정보는 이메일에 포함하지 마세요.
+          </div>
+        </article>
+
+        <article>
+          <h2>고객지원 연락처</h2>
+
+          <div class="contact-box">
+            <div>
+              <h3>KSRRang · KSRAudio Support</h3>
+              <p>
+                이메일:
+                <a href="mailto:support@ksrrang.com">support@ksrrang.com</a>
+              </p>
+              <p>소재지: Seoul, Republic of Korea</p>
+            </div>
+
+            <a class="button button-primary" href="mailto:support@ksrrang.com?subject=KSRAudio%20Support">
+              문의 메일 작성
+            </a>
+          </div>
+
+          <p style="margin-top: 18px; color: var(--muted);">
+            문의 내용에 따라 답변 시간이 달라질 수 있습니다. 앱 오류 제보 시 재현 정보가
+            구체적일수록 문제 확인에 도움이 됩니다.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>KSRRang · KSRAudio</strong><br />
+        © 2026 KSRRang. All rights reserved.
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">홈</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="mailto:support@ksrrang.com">이메일 문의</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
