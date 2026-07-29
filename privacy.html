@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="KSRAudio 개인정보처리방침입니다. 미디어 파일, 마이크, SMB·FTP·SFTP 접속정보, 저장 및 공유 기능의 데이터 처리 방식을 안내합니다."
+  />
+  <meta name="theme-color" content="#111827" />
+  <title>개인정보처리방침 | KSRAudio</title>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --text: #182033;
+      --muted: #667085;
+      --primary: #5b5ce2;
+      --primary-dark: #4546c8;
+      --border: #e5e7eb;
+      --accent: #e9eafe;
+      --notice: #fff8e8;
+      --notice-border: #f3d48a;
+      --danger-bg: #fff2f2;
+      --danger-border: #efb0b0;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      line-height: 1.75;
+      word-break: keep-all;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .brand:hover {
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg, #6567e8, #8b5cf6);
+      box-shadow: 0 8px 20px rgba(91, 92, 226, 0.25);
+    }
+
+    .home-link {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 82px 0 54px;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(139, 92, 246, 0.15), transparent 26%),
+        radial-gradient(circle at 15% 22%, rgba(91, 92, 226, 0.12), transparent 25%),
+        linear-gradient(180deg, #fff 0%, #f5f7fb 100%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 7px 13px;
+      border: 1px solid #dfe1ff;
+      border-radius: 999px;
+      color: var(--primary-dark);
+      background: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.35rem, 6vw, 4rem);
+      line-height: 1.12;
+      letter-spacing: -0.05em;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 21px 0 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .policy {
+      padding: 34px 0 86px;
+    }
+
+    .summary {
+      margin-bottom: 24px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .summary h2 {
+      margin-top: 0;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .summary-item {
+      padding: 18px;
+      border-radius: 16px;
+      background: #f8f9fc;
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .summary-item span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .notice {
+      margin: 24px 0;
+      padding: 20px 22px;
+      border: 1px solid var(--notice-border);
+      border-radius: 16px;
+      background: var(--notice);
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    article {
+      margin-top: 20px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    h2 {
+      margin: 0 0 15px;
+      font-size: 1.55rem;
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      margin: 26px 0 9px;
+      font-size: 1.08rem;
+    }
+
+    p {
+      margin: 0 0 13px;
+    }
+
+    ul {
+      margin: 10px 0 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 14px;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th,
+    td {
+      padding: 13px 12px;
+      border: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f7f8fb;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #f0f2f7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9em;
+    }
+
+    .contact-box {
+      padding: 20px;
+      border-radius: 16px;
+      background: #f7f7ff;
+    }
+
+    .site-footer {
+      padding: 32px 0;
+      color: #a2aabc;
+      background: #0b1020;
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: #c3c8d5;
+    }
+
+    @media (max-width: 680px) {
+      .hero {
+        padding: 62px 0 44px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      article,
+      .summary {
+        padding: 23px 19px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">K</span>
+        <span>KSRAudio</span>
+      </a>
+      <a class="home-link" href="index.html">홈으로</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Privacy Policy</span>
+        <h1>개인정보처리방침</h1>
+        <p>
+          KSRRang(이하 “회사”)은 KSRAudio 이용자의 개인정보와 미디어 데이터를
+          중요하게 보호합니다. 이 방침은 KSRAudio가 어떤 정보에 접근하고, 해당
+          정보를 어떤 목적으로 처리하며, 어디에 저장하거나 전송하는지를 설명합니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="policy">
+      <div class="container">
+        <div class="summary">
+          <h2>핵심 요약</h2>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <strong>미디어 처리</strong>
+              <span>오디오·동영상 파일은 재생, 편집, 보컬 제거 및 저장을 위해 처리됩니다.</span>
+            </div>
+            <div class="summary-item">
+              <strong>마이크 사용</strong>
+              <span>오버더빙 녹음 시에만 사용하며, 이용자가 녹음을 시작한 경우에 작동합니다.</span>
+            </div>
+            <div class="summary-item">
+              <strong>원격 서버 연결</strong>
+              <span>SMB·FTP·SFTP 접속정보와 파일은 이용자가 지정한 서버와 직접 통신합니다.</span>
+            </div>
+            <div class="summary-item">
+              <strong>결과물 저장·공유</strong>
+              <span>편집본은 앱 내부 저장소에 저장되며 이용자가 선택한 앱으로 공유할 수 있습니다.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">
+          <strong>중요 안내</strong>
+          KSRAudio는 이용자가 선택한 미디어 파일과 원격 서버의 콘텐츠를 회사 서버에
+          자동 업로드하지 않습니다. SMB·FTP·SFTP 사용 시 데이터는 이용자의 기기와
+          이용자가 직접 지정한 서버 사이에서 전송됩니다.
+        </div>
+
+        <article>
+          <h2>1. 처리하는 정보와 이용 목적</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>정보 또는 접근 대상</th>
+                <th>이용 목적</th>
+                <th>처리 방식</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>오디오 및 동영상 파일</td>
+                <td>재생, 속도·피치·10밴드 EQ 조절, 보컬 제거, 편집본 생성</td>
+                <td>이용자가 선택한 파일을 기기에서 처리</td>
+              </tr>
+              <tr>
+                <td>마이크 오디오</td>
+                <td>반주 위에 보컬 또는 연주를 녹음하는 오버더빙</td>
+                <td>이용자가 녹음을 실행한 동안 처리</td>
+              </tr>
+              <tr>
+                <td>SMB·FTP·SFTP 서버 주소, 포트, 계정정보</td>
+                <td>이용자가 지정한 원격 서버에 접속</td>
+                <td>기기에 저장되거나 입력 세션 동안 사용될 수 있음</td>
+              </tr>
+              <tr>
+                <td>원격 서버의 오디오·동영상 데이터</td>
+                <td>스트리밍 재생, 편집, 보컬 제거</td>
+                <td>기기와 이용자 지정 서버 사이에서 전송</td>
+              </tr>
+              <tr>
+                <td>생성된 편집본·보컬 제거본·오버더빙 파일</td>
+                <td>결과 확인, 보관 및 공유</td>
+                <td>앱 내부 저장소에 저장</td>
+              </tr>
+              <tr>
+                <td>기기 및 앱 진단정보</td>
+                <td>오류 확인, 서비스 안정성 및 성능 개선</td>
+                <td>진단 또는 광고 SDK를 사용하는 경우 처리될 수 있음</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article>
+          <h2>2. 미디어 파일 처리</h2>
+          <p>
+            KSRAudio는 이용자가 직접 선택하거나 접근을 허용한 오디오 및 동영상 파일을
+            재생하고 처리합니다. 처리 기능에는 속도 변경, 피치 변경, 10밴드 EQ 조절,
+            보컬 제거, 오디오 추출, 편집 결과 저장 등이 포함됩니다.
+          </p>
+          <p>
+            이러한 미디어 파일과 처리 결과는 원칙적으로 이용자의 기기에서 처리되며,
+            회사가 운영하는 서버로 자동 전송되거나 업로드되지 않습니다.
+          </p>
+        </article>
+
+        <article>
+          <h2>3. 마이크 및 오버더빙</h2>
+          <p>
+            KSRAudio는 오버더빙 기능을 제공하기 위해 마이크 권한을 요청할 수 있습니다.
+            마이크는 이용자가 녹음 기능을 명시적으로 시작한 동안에만 사용됩니다.
+          </p>
+          <p>
+            녹음된 음성 또는 연주 데이터는 반주와 혼합되어 오버더빙 결과물로 생성되며,
+            앱 내부 저장소에 저장됩니다. 회사는 해당 녹음 데이터를 회사 서버로 자동
+            전송하지 않습니다.
+          </p>
+        </article>
+
+        <article>
+          <h2>4. SMB·FTP·SFTP 원격 서버 기능</h2>
+          <p>
+            이용자는 본인이 관리하거나 접근 권한을 가진 SMB, FTP 또는 SFTP 서버의
+            오디오·동영상 파일을 KSRAudio에서 재생하고 편집하거나 보컬 제거할 수 있습니다.
+          </p>
+
+          <h3>처리될 수 있는 접속정보</h3>
+          <ul>
+            <li>서버 주소 또는 호스트 이름</li>
+            <li>포트 번호</li>
+            <li>사용자 이름</li>
+            <li>비밀번호, 개인키 또는 기타 인증정보</li>
+            <li>원격 경로 및 파일명</li>
+          </ul>
+
+          <p>
+            접속정보는 원격 서버 연결을 제공하기 위해 이용자의 기기에서 사용됩니다.
+            회사는 이를 회사 서버로 자동 수집하지 않습니다. 다만 이용자가 선택한 서버의
+            운영자 또는 네트워크 제공자는 접속 기록과 전송 정보를 처리할 수 있으며,
+            이에 대해서는 해당 서버 운영자의 정책이 적용됩니다.
+          </p>
+
+          <div class="notice">
+            <strong>FTP 보안 주의</strong>
+            일반 FTP는 접속정보와 전송 내용이 암호화되지 않을 수 있습니다. 중요한 파일이나
+            계정정보를 사용하는 경우 암호화된 SFTP 또는 신뢰할 수 있는 네트워크 사용을
+            권장합니다.
+          </div>
+        </article>
+
+        <article>
+          <h2>5. 파일 저장과 공유</h2>
+          <p>
+            다음 결과물은 앱 내부 저장소에 저장될 수 있습니다.
+          </p>
+          <ul>
+            <li>속도·피치·EQ 변경이 적용된 편집 파일</li>
+            <li>보컬 제거 결과물</li>
+            <li>오버더빙 녹음 및 혼합 결과물</li>
+          </ul>
+          <p>
+            이용자가 공유 기능을 실행하면 Android의 공유 기능을 통해 카카오톡, 이메일,
+            클라우드 저장소 등 이용자가 선택한 제3자 앱으로 파일이 전달됩니다. 공유 이후의
+            개인정보 및 파일 처리는 선택한 제3자 앱의 개인정보처리방침과 이용약관이
+            적용됩니다.
+          </p>
+        </article>
+
+        <article>
+          <h2>6. 권한 이용 안내</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>권한</th>
+                <th>이용 목적</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>오디오·동영상 또는 저장소 접근</td>
+                <td>이용자가 선택한 미디어 파일의 재생, 편집, 저장 및 관리</td>
+              </tr>
+              <tr>
+                <td>마이크</td>
+                <td>오버더빙 및 음성·연주 녹음</td>
+              </tr>
+              <tr>
+                <td>알림</td>
+                <td>백그라운드 재생 및 오디오 처리 상태와 재생 제어 표시</td>
+              </tr>
+              <tr>
+                <td>주변 기기·Bluetooth</td>
+                <td>Bluetooth 오디오 기기 연결 및 재생 제어 지원</td>
+              </tr>
+              <tr>
+                <td>인터넷·네트워크</td>
+                <td>SMB·FTP·SFTP 접속, 광고 또는 온라인 기능 제공</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            선택 권한을 허용하지 않아도 해당 권한이 필요하지 않은 기능은 사용할 수 있으나,
+            권한이 필요한 일부 기능은 제한될 수 있습니다.
+          </p>
+        </article>
+
+        <article>
+          <h2>7. 광고 및 제3자 서비스</h2>
+          <p>
+            KSRAudio는 서비스 운영을 위해 Google AdMob 등 광고 서비스를 사용할 수 있습니다.
+            광고 SDK는 광고 제공, 부정 이용 방지, 빈도 제한, 성과 측정 등을 위해 광고 식별자,
+            IP 주소, 기기 정보, 앱 상호작용 및 대략적인 위치정보와 같은 정보를 처리할 수
+            있습니다.
+          </p>
+          <p>
+            유럽경제지역(EEA), 영국 및 기타 동의가 필요한 지역에서는 관련 법령과 Google
+            정책에 따라 광고 및 관련 데이터 처리에 대한 동의 선택 화면이 제공될 수 있습니다.
+            제3자 서비스가 처리하는 데이터는 해당 제공자의 개인정보처리방침이 적용됩니다.
+          </p>
+          <p>
+            실제 출시 버전에서 광고 또는 특정 진단 서비스를 사용하지 않는 경우 해당 서비스는
+            데이터를 처리하지 않습니다.
+          </p>
+        </article>
+
+        <article>
+          <h2>8. 개인정보의 제3자 제공 및 국외 이전</h2>
+          <p>
+            회사는 이용자의 개인정보를 원칙적으로 외부에 판매하지 않습니다. 다만 이용자가
+            파일 공유를 직접 실행하거나, 광고·진단 등 제3자 SDK가 앱에 포함된 경우 해당
+            서비스 제공자가 관련 정보를 처리할 수 있습니다.
+          </p>
+          <p>
+            Google 등 글로벌 서비스 제공자를 사용하는 경우 정보가 대한민국 외 지역의
+            서버에서 처리될 수 있습니다. 구체적인 처리 항목과 위치는 해당 서비스 제공자의
+            정책 및 서비스 구성에 따라 달라질 수 있습니다.
+          </p>
+        </article>
+
+        <article>
+          <h2>9. 보유 및 파기</h2>
+          <p>
+            KSRAudio가 앱 내부 저장소에 저장한 설정, 원격 서버 접속정보 및 생성 파일은
+            이용자가 앱에서 삭제하거나 앱을 제거할 때까지 기기에 남을 수 있습니다.
+          </p>
+          <ul>
+            <li>생성 파일: 이용자가 직접 삭제할 때까지 보관</li>
+            <li>앱 설정 및 서버 접속정보: 이용자가 삭제하거나 앱 데이터 초기화 시까지 보관</li>
+            <li>임시 처리 데이터: 작업 완료 후 불필요해지면 삭제 또는 덮어쓰기</li>
+            <li>제3자 광고·진단 데이터: 각 서비스 제공자의 보유기간에 따름</li>
+          </ul>
+          <p>
+            Android 백업 설정이나 기기 제조사의 백업 기능에 따라 일부 앱 데이터가 이용자의
+            Google 계정 또는 제조사 클라우드에 백업될 수 있습니다.
+          </p>
+        </article>
+
+        <article>
+          <h2>10. 이용자의 권리와 선택</h2>
+          <p>이용자는 다음 방법으로 데이터 처리를 관리할 수 있습니다.</p>
+          <ul>
+            <li>Android 설정에서 KSRAudio의 권한 변경 또는 철회</li>
+            <li>앱에서 저장된 파일과 원격 서버 접속정보 삭제</li>
+            <li>앱 데이터 초기화 또는 앱 삭제</li>
+            <li>광고 동의 화면이나 기기 설정을 통한 광고 개인정보 선택 변경</li>
+            <li>개인정보 관련 문의 및 처리 요청</li>
+          </ul>
+        </article>
+
+        <article>
+          <h2>11. 아동의 개인정보</h2>
+          <p>
+            KSRAudio는 아동을 대상으로 개인정보를 의도적으로 수집하도록 설계되지 않았습니다.
+            법정대리인의 동의가 필요한 아동의 개인정보가 수집된 사실을 확인한 경우 관련 법령에
+            따라 필요한 조치를 취합니다.
+          </p>
+        </article>
+
+        <article>
+          <h2>12. 안전성 확보 조치</h2>
+          <p>
+            회사는 개인정보와 이용자 데이터를 보호하기 위해 합리적인 기술적·관리적 조치를
+            적용합니다. 다만 이용자가 직접 운영하거나 선택한 SMB·FTP·SFTP 서버의 보안,
+            계정 관리 및 접근 권한은 이용자의 책임 영역에 해당합니다.
+          </p>
+          <ul>
+            <li>불필요한 개인정보 수집 최소화</li>
+            <li>Android 권한 체계를 통한 접근 통제</li>
+            <li>앱 전용 저장공간을 이용한 결과물 관리</li>
+            <li>가능한 경우 암호화된 통신 방식 사용</li>
+          </ul>
+        </article>
+
+        <article>
+          <h2>13. 개인정보처리방침 변경</h2>
+          <p>
+            이 방침은 기능, 법령 또는 서비스 운영 방식의 변경에 따라 수정될 수 있습니다.
+            중요한 변경이 있는 경우 앱, 웹사이트 또는 Google Play 등록정보를 통해 알립니다.
+          </p>
+          <p>
+            <strong>시행일:</strong> 2026년 7월 29일
+          </p>
+        </article>
+
+        <article>
+          <h2>14. 개인정보 보호 문의</h2>
+          <div class="contact-box">
+            <p><strong>서비스 및 사업자명:</strong> KSRRang</p>
+            <p><strong>앱 이름:</strong> KSRAudio</p>
+            <p>
+              <strong>이메일:</strong>
+              <a href="mailto:support@ksrrang.com">support@ksrrang.com</a>
+            </p>
+            <p><strong>소재지:</strong> Seoul, Republic of Korea</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>KSRRang · KSRAudio</strong><br />
+        © 2026 KSRRang. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a href="index.html">홈</a>
+        <a href="support.html">고객지원</a>
+        <a href="mailto:support@ksrrang.com">이메일 문의</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
