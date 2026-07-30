@@ -1,27 +1,371 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="KSRAudio Privacy Policy covering media, microphone, remote-server credentials, storage, and sharing.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="KSRAudio Privacy Policy covering media files, microphone use, SMB/FTP/SFTP credentials, storage, and sharing."
+  />
+  <meta name="theme-color" content="#111827" />
   <title>Privacy Policy | KSRAudio</title>
   <script src="locale.js"></script>
+
   <style>
-    :root{--ink:#182033;--muted:#667085;--brand:#5b5ce2;--line:#e5e7eb;--soft:#f5f7fb}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--soft);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(900px,calc(100% - 36px));margin:auto}header{background:#fff;border-bottom:1px solid var(--line)}nav{min-height:68px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:850;text-decoration:none}.language{color:var(--brand);font-weight:800}.hero{padding:72px 0 50px}.hero h1{margin:0;font-size:clamp(2.5rem,6vw,4.3rem);letter-spacing:-.05em}.hero p{color:var(--muted)}main{padding-bottom:70px}article{margin:18px 0;padding:28px;border:1px solid var(--line);border-radius:20px;background:#fff}h2{margin-top:0}li+li{margin-top:7px}.note{padding:18px;border-radius:14px;background:#eeeeff}footer{padding:30px 0;color:#aab2c2;background:#0b1020}.foot{display:flex;justify-content:space-between;gap:20px}@media(max-width:620px){article{padding:22px}.foot{flex-direction:column}}
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --text: #182033;
+      --muted: #667085;
+      --primary: #5b5ce2;
+      --primary-dark: #4546c8;
+      --border: #e5e7eb;
+      --accent: #e9eafe;
+      --notice: #fff8e8;
+      --notice-border: #f3d48a;
+      --danger-bg: #fff2f2;
+      --danger-border: #efb0b0;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      line-height: 1.75;
+      word-break: keep-all;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .brand:hover {
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg, #6567e8, #8b5cf6);
+      box-shadow: 0 8px 20px rgba(91, 92, 226, 0.25);
+    }
+
+    .home-link {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 82px 0 54px;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(139, 92, 246, 0.15), transparent 26%),
+        radial-gradient(circle at 15% 22%, rgba(91, 92, 226, 0.12), transparent 25%),
+        linear-gradient(180deg, #fff 0%, #f5f7fb 100%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 7px 13px;
+      border: 1px solid #dfe1ff;
+      border-radius: 999px;
+      color: var(--primary-dark);
+      background: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.35rem, 6vw, 4rem);
+      line-height: 1.12;
+      letter-spacing: -0.05em;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 21px 0 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .policy {
+      padding: 34px 0 86px;
+    }
+
+    .summary {
+      margin-bottom: 24px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .summary h2 {
+      margin-top: 0;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .summary-item {
+      padding: 18px;
+      border-radius: 16px;
+      background: #f8f9fc;
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .summary-item span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .notice {
+      margin: 24px 0;
+      padding: 20px 22px;
+      border: 1px solid var(--notice-border);
+      border-radius: 16px;
+      background: var(--notice);
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    article {
+      margin-top: 20px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    h2 {
+      margin: 0 0 15px;
+      font-size: 1.55rem;
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      margin: 26px 0 9px;
+      font-size: 1.08rem;
+    }
+
+    p {
+      margin: 0 0 13px;
+    }
+
+    ul {
+      margin: 10px 0 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 14px;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th,
+    td {
+      padding: 13px 12px;
+      border: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f7f8fb;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #f0f2f7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9em;
+    }
+
+    .contact-box {
+      padding: 20px;
+      border-radius: 16px;
+      background: #f7f7ff;
+    }
+
+    .site-footer {
+      padding: 32px 0;
+      color: #a2aabc;
+      background: #0b1020;
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: #c3c8d5;
+    }
+
+    @media (max-width: 680px) {
+      .hero {
+        padding: 62px 0 44px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      article,
+      .summary {
+        padding: 23px 19px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <header><nav class="wrap"><a class="brand" href="index.en.html">KSRAudio</a><div><a href="support.en.html">Support</a> · <a class="language" href="privacy.html?lang=ko">한국어</a></div></nav></header>
-  <section class="hero"><div class="wrap"><h1>Privacy Policy</h1><p>KSRRang (the “Company”) places great importance on protecting the personal information and media data of KSRAudio users. This policy explains what information KSRAudio accesses, why it processes that information, and where the information is stored or transmitted.</p><p>Effective date: July 29, 2026</p></div></section>
-  <main class="wrap">
-    <section><h2>Summary</h2>
-      <p><strong>Media processing:</strong> Audio and video files are processed for playback, editing, vocal removal, and saving.</p>
-      <p><strong>Microphone:</strong> It is used only for overdub recording and operates only after the user starts recording.</p>
-      <p><strong>Remote servers:</strong> SMB, FTP, and SFTP credentials and files communicate directly with the server specified by the user.</p>
-      <p><strong>Saving and sharing:</strong> Edited results are stored in the app's internal storage and can be shared with an app selected by the user.</p>
-      <p class="note"><strong>Important:</strong> KSRAudio does not automatically upload user-selected media or remote-server content to servers operated by the Company. With SMB, FTP, or SFTP, data is transferred between the user's device and the server the user specifies.</p>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.en.html">
+        <span class="brand-mark">K</span>
+        <span>KSRAudio</span>
+      </a>
+      <div>
+        <a class="home-link" href="index.en.html">Home</a>
+        · <a class="home-link" href="privacy.html?lang=ko">한국어</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Privacy Policy</span>
+        <h1>Privacy Policy</h1>
+        <p>
+          KSRRang (the “Company”) places great importance on protecting the personal information and media data of KSRAudio users. This policy explains what information KSRAudio accesses, why it processes that information, and where the information is stored or transmitted.
+        </p>
+      </div>
     </section>
-    <article><h2>1. Information processed and purposes</h2><table><thead><tr><th>Information or resource</th><th>Purpose</th><th>Method</th></tr></thead><tbody>
+
+    <section class="policy">
+      <div class="container">
+        <div class="summary">
+          <h2>Summary</h2>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <strong>Media processing</strong>
+              <span>Audio and video files are processed for playback, editing, vocal removal, and saving.</span>
+            </div>
+            <div class="summary-item">
+              <strong>Microphone</strong>
+              <span>It is used only for overdub recording and operates only after the user starts recording.</span>
+            </div>
+            <div class="summary-item">
+              <strong>Remote servers</strong>
+              <span>SMB, FTP, and SFTP credentials and files communicate directly with the server specified by the user.</span>
+            </div>
+            <div class="summary-item">
+              <strong>Saving and sharing</strong>
+              <span>Edited results are stored in app-internal storage and can be shared with an app selected by the user.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">
+          <strong>Important</strong>
+          KSRAudio does not automatically upload user-selected media or remote-server content to servers operated by the Company. With SMB, FTP, or SFTP, data is transferred between the user's device and the server the user specifies.
+        </div>
+
+        <article><h2>1. Information processed and purposes</h2><table><thead><tr><th>Information or resource</th><th>Purpose</th><th>Method</th></tr></thead><tbody>
       <tr><td>Audio and video files</td><td>Playback, speed, pitch, 10-band EQ, vocal removal, and edited-file creation</td><td>The selected file is processed on the device</td></tr>
       <tr><td>Microphone audio</td><td>Recording vocals or instruments over a backing track</td><td>Processed while the user is recording</td></tr>
       <tr><td>SMB, FTP, or SFTP address, port, and account information</td><td>Connecting to the remote server specified by the user</td><td>May be stored on the device or used during the input session</td></tr>
@@ -29,27 +373,56 @@
       <tr><td>Created edits, vocal-removal results, and overdub files</td><td>Review, retention, and sharing</td><td>Stored in app-internal storage</td></tr>
       <tr><td>Device and app diagnostics</td><td>Troubleshooting, stability, and performance improvement</td><td>May be processed if diagnostic or advertising SDKs are used</td></tr>
     </tbody></table></article>
-    <article><h2>2. Media file processing</h2><p>KSRAudio plays and processes audio and video files that the user directly selects or permits the app to access. Processing includes speed and pitch changes, 10-band EQ adjustment, vocal removal, audio extraction, and saving edited results.</p><p>As a rule, these media files and results are processed on the user's device and are not automatically transmitted or uploaded to servers operated by the Company.</p></article>
-    <article><h2>3. Microphone and overdubbing</h2><p>KSRAudio may request microphone permission to provide overdubbing. The microphone is used only while the user has explicitly started recording.</p><p>Recorded voice or instrument audio is mixed with a backing track to create an overdub result and is stored in app-internal storage. The Company does not automatically transmit this recording to its servers.</p></article>
-    <article><h2>4. SMB, FTP, and SFTP remote-server features</h2><p>Users may play, edit, or remove vocals from audio and video files on an SMB, FTP, or SFTP server that they manage or are authorized to access.</p><h3>Connection information that may be processed</h3><ul><li>Server address or host name</li><li>Port number</li><li>Username</li><li>Password, private key, or other authentication information</li><li>Remote path and filename</li></ul><p>Connection information is used on the user's device to provide the remote connection. The Company does not automatically collect it on Company servers. However, the operator of the selected server or a network provider may process connection logs and transfer information under that operator's policy.</p><p class="note"><strong>FTP security warning:</strong> Standard FTP may not encrypt credentials or transferred content. For important files or credentials, use encrypted SFTP or a trusted network.</p></article>
-    <article><h2>5. File storage and sharing</h2><p>The following may be stored in app-internal storage:</p><ul><li>Edited files with speed, pitch, or EQ changes</li><li>Vocal-removal results</li><li>Overdub recordings and mixed results</li></ul><p>When the user invokes sharing, Android sends the file to a third-party app selected by the user, such as KakaoTalk, email, or cloud storage. After sharing, that app's privacy policy and terms govern its processing of the file and personal information.</p></article>
-    <article><h2>6. Permissions</h2><table><thead><tr><th>Permission</th><th>Purpose</th></tr></thead><tbody>
+
+        <article><h2>2. Media file processing</h2><p>KSRAudio plays and processes audio and video files that the user directly selects or permits the app to access. Processing includes speed and pitch changes, 10-band EQ adjustment, vocal removal, audio extraction, and saving edited results.</p><p>As a rule, these media files and results are processed on the user's device and are not automatically transmitted or uploaded to servers operated by the Company.</p></article>
+
+        <article><h2>3. Microphone and overdubbing</h2><p>KSRAudio may request microphone permission to provide overdubbing. The microphone is used only while the user has explicitly started recording.</p><p>Recorded voice or instrument audio is mixed with a backing track to create an overdub result and is stored in app-internal storage. The Company does not automatically transmit this recording to its servers.</p></article>
+
+        <article><h2>4. SMB, FTP, and SFTP remote-server features</h2><p>Users may play, edit, or remove vocals from audio and video files on an SMB, FTP, or SFTP server that they manage or are authorized to access.</p><h3>Connection information that may be processed</h3><ul><li>Server address or host name</li><li>Port number</li><li>Username</li><li>Password, private key, or other authentication information</li><li>Remote path and filename</li></ul><p>Connection information is used on the user's device to provide the remote connection. The Company does not automatically collect it on Company servers. However, the operator of the selected server or a network provider may process connection logs and transfer information under that operator's policy.</p><p class="notice"><strong>FTP security warning:</strong> Standard FTP may not encrypt credentials or transferred content. For important files or credentials, use encrypted SFTP or a trusted network.</p></article>
+
+        <article><h2>5. File storage and sharing</h2><p>The following may be stored in app-internal storage:</p><ul><li>Edited files with speed, pitch, or EQ changes</li><li>Vocal-removal results</li><li>Overdub recordings and mixed results</li></ul><p>When the user invokes sharing, Android sends the file to a third-party app selected by the user, such as KakaoTalk, email, or cloud storage. After sharing, that app's privacy policy and terms govern its processing of the file and personal information.</p></article>
+
+        <article><h2>6. Permissions</h2><table><thead><tr><th>Permission</th><th>Purpose</th></tr></thead><tbody>
       <tr><td>Audio, video, or storage access</td><td>Play, edit, save, and manage user-selected media</td></tr>
       <tr><td>Microphone</td><td>Overdub and voice or instrument recording</td></tr>
       <tr><td>Notifications</td><td>Show background playback, audio-processing status, and playback controls</td></tr>
       <tr><td>Nearby devices/Bluetooth</td><td>Connect Bluetooth audio devices and support playback controls</td></tr>
       <tr><td>Internet/network</td><td>SMB, FTP, and SFTP access, advertising, or online features</td></tr>
     </tbody></table><p>If an optional permission is denied, features that do not need it remain available, but features requiring it may be limited.</p></article>
-    <article><h2>7. Advertising and third-party services</h2><p>KSRAudio may use advertising services such as Google AdMob to operate the service. An advertising SDK may process information such as an advertising identifier, IP address, device information, app interactions, and approximate location to deliver ads, prevent abuse, limit frequency, and measure performance.</p><p>In the European Economic Area (EEA), the United Kingdom, and other regions requiring consent, a choice screen for advertising and related data processing may be provided under applicable law and Google policies. Data processed by a third-party service is governed by that provider's privacy policy.</p><p>If advertising or a particular diagnostic service is not included in the released version, that service does not process data.</p></article>
-    <article><h2>8. Third-party disclosure and international transfer</h2><p>As a rule, the Company does not sell personal information. However, when a user directly shares a file, or when the app includes a third-party advertising or diagnostic SDK, the relevant service provider may process related information.</p><p>When global providers such as Google are used, information may be processed on servers outside the Republic of Korea. The specific data and locations depend on the provider's policies and service configuration.</p></article>
-    <article><h2>9. Retention and deletion</h2><p>Settings, remote-server credentials, and created files stored by KSRAudio in app-internal storage may remain on the device until the user deletes them in the app or uninstalls the app.</p><ul><li>Created files: retained until the user deletes them</li><li>App settings and server credentials: retained until deleted by the user or app data is cleared</li><li>Temporary processing data: deleted or overwritten when no longer needed after completion</li><li>Third-party advertising and diagnostic data: retained according to each provider's retention period</li></ul><p>Depending on Android backup settings or the device manufacturer's backup features, some app data may be backed up to the user's Google account or manufacturer cloud.</p></article>
-    <article><h2>10. User rights and choices</h2><p>Users can manage processing by:</p><ul><li>Changing or withdrawing KSRAudio permissions in Android Settings</li><li>Deleting saved files and remote-server credentials in the app</li><li>Clearing app data or uninstalling the app</li><li>Changing advertising privacy choices through a consent screen or device settings</li><li>Contacting us with a privacy inquiry or request</li></ul></article>
-    <article><h2>11. Children's personal information</h2><p>KSRAudio is not designed to intentionally collect children's personal information. If we learn that information requiring consent from a legal representative has been collected, we will take the measures required by applicable law.</p></article>
-    <article><h2>12. Security measures</h2><p>The Company applies reasonable technical and administrative measures to protect personal information and user data. Security, account management, and access permissions for an SMB, FTP, or SFTP server operated or selected by the user remain the user's responsibility.</p><ul><li>Minimizing unnecessary personal-information collection</li><li>Access control through Android's permission system</li><li>Managing results in app-specific storage</li><li>Using encrypted communication where possible</li></ul></article>
-    <article><h2>13. Changes to this Privacy Policy</h2><p>This policy may be revised due to changes in features, law, or service operation. Material changes will be announced through the app, website, or Google Play listing.</p><p><strong>Effective date:</strong> July 29, 2026</p></article>
-    <article><h2>14. Website display-language detection</h2><p>To determine whether a visitor is connecting from the Republic of Korea and automatically show Korean or English, this website sends a short request to the IP-based country detection service ipwho.is. The website stores only the resulting language value in the browser's session storage and does not separately store the IP address.</p><p>If country detection fails, the browser time zone is used to choose a language. Visitors can override the automatic choice at any time through the page's language link. The external country detection service may process information under its own policy.</p></article>
-    <article><h2>15. Privacy contact</h2><p><strong>Service and business name:</strong> KSRRang</p><p><strong>App:</strong> KSRAudio</p><p><strong>Email:</strong> <a href="mailto:support@ksrrang.com">support@ksrrang.com</a></p><p><strong>Location:</strong> Seoul, Republic of Korea</p></article>
+
+        <article><h2>7. Advertising and third-party services</h2><p>KSRAudio may use advertising services such as Google AdMob to operate the service. An advertising SDK may process information such as an advertising identifier, IP address, device information, app interactions, and approximate location to deliver ads, prevent abuse, limit frequency, and measure performance.</p><p>In the European Economic Area (EEA), the United Kingdom, and other regions requiring consent, a choice screen for advertising and related data processing may be provided under applicable law and Google policies. Data processed by a third-party service is governed by that provider's privacy policy.</p><p>If advertising or a particular diagnostic service is not included in the released version, that service does not process data.</p></article>
+
+        <article><h2>8. Third-party disclosure and international transfer</h2><p>As a rule, the Company does not sell personal information. However, when a user directly shares a file, or when the app includes a third-party advertising or diagnostic SDK, the relevant service provider may process related information.</p><p>When global providers such as Google are used, information may be processed on servers outside the Republic of Korea. The specific data and locations depend on the provider's policies and service configuration.</p></article>
+
+        <article><h2>9. Retention and deletion</h2><p>Settings, remote-server credentials, and created files stored by KSRAudio in app-internal storage may remain on the device until the user deletes them in the app or uninstalls the app.</p><ul><li>Created files: retained until the user deletes them</li><li>App settings and server credentials: retained until deleted by the user or app data is cleared</li><li>Temporary processing data: deleted or overwritten when no longer needed after completion</li><li>Third-party advertising and diagnostic data: retained according to each provider's retention period</li></ul><p>Depending on Android backup settings or the device manufacturer's backup features, some app data may be backed up to the user's Google account or manufacturer cloud.</p></article>
+
+        <article><h2>10. User rights and choices</h2><p>Users can manage processing by:</p><ul><li>Changing or withdrawing KSRAudio permissions in Android Settings</li><li>Deleting saved files and remote-server credentials in the app</li><li>Clearing app data or uninstalling the app</li><li>Changing advertising privacy choices through a consent screen or device settings</li><li>Contacting us with a privacy inquiry or request</li></ul></article>
+
+        <article><h2>11. Children's personal information</h2><p>KSRAudio is not designed to intentionally collect children's personal information. If we learn that information requiring consent from a legal representative has been collected, we will take the measures required by applicable law.</p></article>
+
+        <article><h2>12. Security measures</h2><p>The Company applies reasonable technical and administrative measures to protect personal information and user data. Security, account management, and access permissions for an SMB, FTP, or SFTP server operated or selected by the user remain the user's responsibility.</p><ul><li>Minimizing unnecessary personal-information collection</li><li>Access control through Android's permission system</li><li>Managing results in app-specific storage</li><li>Using encrypted communication where possible</li></ul></article>
+
+        <article><h2>13. Changes to this Privacy Policy</h2><p>This policy may be revised due to changes in features, law, or service operation. Material changes will be announced through the app, website, or Google Play listing.</p><p><strong>Effective date:</strong> July 29, 2026</p></article>
+
+        <article><h2>14. Website display-language detection</h2><p>To determine whether a visitor is connecting from the Republic of Korea and automatically show Korean or English, this website sends a short request to the IP-based country detection service ipwho.is. The website stores only the resulting language value in the browser's session storage and does not separately store the IP address.</p><p>If country detection fails, the browser time zone is used to choose a language. Visitors can override the automatic choice at any time through the page's language link. The external country detection service may process information under its own policy.</p></article>
+
+        <article><h2>15. Privacy contact</h2><div class="contact-box"><p><strong>Service and business name:</strong> KSRRang</p><p><strong>App:</strong> KSRAudio</p><p><strong>Email:</strong> <a href="mailto:support@ksrrang.com">support@ksrrang.com</a></p><p><strong>Location:</strong> Seoul, Republic of Korea</p></div></article>
+      </div>
+    </section>
   </main>
-  <footer><div class="wrap foot"><div>© 2026 KSRRang</div><div><a href="index.en.html">Home</a> · <a href="support.en.html">Support</a> · <a href="privacy.html?lang=ko">한국어</a></div></div></footer>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>KSRRang · KSRAudio</strong><br />
+        © 2026 KSRRang. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a href="index.en.html">Home</a>
+        <a href="support.en.html">Support</a>
+        <a href="mailto:support@ksrrang.com">Email</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

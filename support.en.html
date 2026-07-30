@@ -1,39 +1,533 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="KSRAudio help for playback, editing, vocal removal, overdubbing, remote servers, saving, and sharing.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="KSRAudio support for playback, editing, vocal removal, overdubbing, SMB/FTP/SFTP connections, file storage, and sharing."
+  />
+  <meta name="theme-color" content="#111827" />
   <title>Support | KSRAudio</title>
   <script src="locale.js"></script>
+
   <style>
-    :root{--ink:#182033;--muted:#667085;--brand:#5b5ce2;--line:#e5e7eb;--soft:#f5f7fb}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--soft);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(960px,calc(100% - 36px));margin:auto}header{position:sticky;top:0;background:#fffffff0;border-bottom:1px solid var(--line)}nav{min-height:68px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:850;text-decoration:none}.language{color:var(--brand);font-weight:800}.hero{padding:75px 0 55px;background:#fff}.hero h1{margin:0;font-size:clamp(2.5rem,6vw,4.3rem);letter-spacing:-.05em}.hero p{max-width:720px;color:var(--muted)}main{padding:45px 0 70px}article{scroll-margin-top:85px;margin:18px 0;padding:28px;border:1px solid var(--line);border-radius:20px;background:#fff}h2{margin-top:0}h3{margin-top:25px}li+li{margin-top:7px}.button{display:inline-block;padding:12px 18px;border-radius:12px;color:#fff;background:var(--brand);font-weight:800;text-decoration:none}.note{padding:18px;border-radius:14px;background:#fff7df}details{margin-top:12px;border:1px solid var(--line);border-radius:14px}summary{padding:16px;font-weight:800;cursor:pointer}details p,details ul{margin:0;padding:0 18px 18px}footer{padding:30px 0;color:#aab2c2;background:#0b1020}.foot{display:flex;justify-content:space-between;gap:20px}@media(max-width:620px){article{padding:22px}.foot{flex-direction:column}}
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --text: #182033;
+      --muted: #667085;
+      --primary: #5b5ce2;
+      --primary-dark: #4546c8;
+      --border: #e5e7eb;
+      --accent: #e9eafe;
+      --notice: #fff8e8;
+      --notice-border: #f3d48a;
+      --success: #edf9f1;
+      --success-border: #aad8b8;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .brand:hover {
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg, #6567e8, #8b5cf6);
+      box-shadow: 0 8px 20px rgba(91, 92, 226, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      color: inherit;
+    }
+
+    .hero {
+      padding: 82px 0 58px;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(139, 92, 246, 0.16), transparent 27%),
+        radial-gradient(circle at 12% 20%, rgba(91, 92, 226, 0.12), transparent 26%),
+        linear-gradient(180deg, #fff 0%, #f5f7fb 100%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 7px 13px;
+      border: 1px solid #dfe1ff;
+      border-radius: 999px;
+      color: var(--primary-dark);
+      background: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.45rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.055em;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 21px 0 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 21px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 12px 24px rgba(91, 92, 226, 0.23);
+    }
+
+    .button-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border-color: var(--border);
+      background: #fff;
+    }
+
+    main section.content {
+      padding: 42px 0 88px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .quick-card {
+      display: block;
+      padding: 23px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.045);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .quick-card:hover {
+      text-decoration: none;
+      transform: translateY(-3px);
+      border-color: #c8c9f8;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.09);
+    }
+
+    .quick-card:focus-visible {
+      outline: 3px solid rgba(91, 92, 226, 0.3);
+      outline-offset: 3px;
+    }
+
+    .quick-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--primary);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .quick-icon {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      color: var(--primary);
+      background: var(--accent);
+      font-weight: 900;
+    }
+
+    .quick-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.12rem;
+    }
+
+    .quick-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    article {
+      scroll-margin-top: 88px;
+      margin-top: 20px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    article h2 {
+      margin: 0 0 16px;
+      font-size: 1.55rem;
+      letter-spacing: -0.025em;
+    }
+
+    article h3 {
+      margin: 25px 0 8px;
+      font-size: 1.08rem;
+    }
+
+    article p {
+      margin: 0 0 13px;
+    }
+
+    ul,
+    ol {
+      margin: 10px 0 0;
+      padding-left: 23px;
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    details {
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: #fbfcfe;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 17px 19px;
+      cursor: pointer;
+      font-weight: 800;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] summary {
+      border-bottom: 1px solid var(--border);
+      background: #f7f8fc;
+    }
+
+    .answer {
+      padding: 18px 19px;
+      color: var(--muted);
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 20px 22px;
+      border: 1px solid var(--notice-border);
+      border-radius: 16px;
+      background: var(--notice);
+    }
+
+    .notice strong,
+    .success strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .success {
+      margin-top: 20px;
+      padding: 20px 22px;
+      border: 1px solid var(--success-border);
+      border-radius: 16px;
+      background: var(--success);
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 22px;
+      padding: 25px;
+      border-radius: 18px;
+      background: #f7f7ff;
+    }
+
+    .contact-box h3 {
+      margin: 0 0 6px;
+    }
+
+    .contact-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .back-link {
+      margin-top: 22px;
+      text-align: right;
+      font-weight: 800;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #f0f2f7;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9em;
+    }
+
+    .site-footer {
+      padding: 32px 0;
+      color: #a2aabc;
+      background: #0b1020;
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: #c3c8d5;
+    }
+
+    @media (max-width: 760px) {
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        padding: 62px 0 46px;
+      }
+
+      article {
+        padding: 23px 19px;
+      }
+
+      .nav-links a:first-child {
+        display: none;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
-<body>
-  <header><nav class="wrap"><a class="brand" href="index.en.html">KSRAudio</a><div><a href="#faq">FAQ</a> · <a href="privacy.en.html">Privacy</a> · <a class="language" href="support.html?lang=ko">한국어</a></div></nav></header>
-  <section class="hero"><div class="wrap"><h1>KSRAudio Support</h1><p>Help with playback, editing, vocal removal, overdubbing, SMB/FTP/SFTP connections, saving, and sharing.</p><a class="button" href="mailto:support@ksrrang.com?subject=KSRAudio%20Support">Email support</a></div></section>
-  <main class="wrap">
-    <section aria-label="Support topics"><h2>Playback issues</h2><p>What to check when a file will not open or playback is interrupted.</p><h2>Remote-server connections</h2><p>How to investigate SMB, FTP, and SFTP connection and network failures.</p><h2>Saving and sharing</h2><p>Where edited results are saved and how to share them through KakaoTalk or another app.</p></section>
-    <article><h2>Before contacting support</h2><ol><li>Update KSRAudio to the latest version.</li><li>Fully close and reopen the app.</li><li>Check free storage space and the network connection.</li><li>Check media, microphone, and notification permissions in Android Settings.</li><li>For remote servers, verify that the same account works from another app or computer.</li></ol><p class="note"><strong>Keep your originals:</strong> back up important source files before editing, vocal removal, or overdubbing.</p></article>
-    <article><h2>Playback troubleshooting</h2><ol><li>Check whether the file plays in another player.</li><li>Confirm that it is complete and not damaged.</li><li>Check KSRAudio's audio and video access permission.</li><li>Re-select files obtained through external storage or a file-provider app.</li><li>For remote media, check Wi-Fi signal and server response.</li><li>Close other apps before playing high-resolution or high-bitrate media.</li></ol><p>Files with the same extension can use different codecs. For a file-specific issue, include the extension, codecs, and approximate size in your report.</p></article>
-    <article><h2>SMB, FTP, and SFTP connection troubleshooting</h2><p>First check the server address, port, account information, and network connection. Never send a password or private key to customer support.</p><h3>Checks for every protocol</h3><ul><li>Confirm that the phone is on a network that can reach the server address.</li><li>Make sure the protocol has not been entered twice in the server address.</li><li>Recheck the username, password, port number, and remote path.</li><li>Check whether the server firewall or router blocks the port.</li><li>Test the same account with another client on a computer.</li></ul><h3>SMB</h3><ul><li>Check the share name and the account's read permission.</li><li>Check the SMB version and authentication method used by the server.</li><li>On a local network, try the server IP address instead of its name.</li></ul><h3>FTP and SFTP</h3><ul><li>FTP and SFTP are different protocols, so select the correct one.</li><li>Typical ports are FTP 21 and SFTP 22, but the server configuration takes priority.</li><li>For an SFTP private key, check the key format and its registration on the server.</li></ul></article>
-    <article><h2>Saving and sharing</h2><p>Edits with speed, pitch, or EQ changes, vocal-removal results, and overdubs are stored in app-internal storage.</p><h3>Managing saved files</h3><ul><li>Find results in the app's saved-files or file-management screen.</li><li>A task can fail when storage is low, so make sufficient space available.</li><li>Uninstalling the app or clearing app data may also delete internal files.</li><li>Back up important results separately by sharing or exporting them.</li></ul><h3>Sharing through KakaoTalk or another app</h3><ol><li>Select a saved result in KSRAudio.</li><li>Tap Share.</li><li>Choose KakaoTalk, email, cloud storage, or another destination.</li><li>Select the recipient or save location in that app.</li></ol><p class="note"><strong>If sharing fails:</strong> the file may exceed the receiving app's transfer limit. Save a smaller file, or upload it to cloud storage and share a link.</p></article>
-    <article id="faq"><h2>Frequently asked questions</h2>
-      <details><summary>Why won't a media file open?</summary><p>It may be damaged, use a codec or container unsupported by the device, or lack a valid Android access grant. Test it in another player and check that file-access permission is allowed.</p><p>For a file selected through external storage or a file manager, Android's access permission may expire, in which case the file must be selected again.</p></details>
-      <details><summary>Where are edited files stored?</summary><p>Edits, vocal-removal results, and overdubs are kept in KSRAudio's internal storage. Export important files before uninstalling or clearing app data.</p></details>
-      <details><summary>Can I send a saved file through KakaoTalk or to another device?</summary><p>Yes. Select the saved file and use Share to send it to KakaoTalk, email, cloud storage, or another app that supports Android sharing. If the file is too large for the destination, use cloud storage or another transfer method.</p></details>
-      <details><summary>Why can't I connect to an SMB server?</summary><ul><li>Confirm that the phone and SMB server are on the same reachable network.</li><li>Check the address, share name, username, and password.</li><li>Confirm that the account has read permission for the share.</li><li>Check that the router or server firewall does not block SMB.</li><li>Check the server's supported SMB version and security settings.</li></ul></details>
-      <details><summary>Why can't I connect to an FTP or SFTP server?</summary><ul><li>Confirm the protocol choice because FTP and SFTP are different.</li><li>Check the address and port. FTP commonly uses 21 and SFTP 22, but server settings may differ.</li><li>Check the username, password, or private key.</li><li>Check whether the mobile network or router firewall blocks that port.</li><li>Review the server connection log for the authentication failure.</li></ul></details>
-      <details><summary>Why does remote playback stop?</summary><p>Network speed, server response, Wi-Fi signal, and media bitrate can cause interruptions. Use a stable connection and reduce other network traffic.</p></details>
-      <details><summary>Why does vocal removal take a long time?</summary><p>It is compute intensive. Duration depends on file length, device performance, battery-saving settings, and temperature. Keep the app open and ensure sufficient battery.</p></details>
-      <details><summary>Why is my microphone not recorded?</summary><ul><li>Allow KSRAudio's microphone permission in Android Settings.</li><li>Check whether another recording or calling app is using the microphone.</li><li>A Bluetooth headset may change which microphone is selected.</li><li>Test the device microphone in another recording app.</li></ul></details>
-      <details><summary>Why does background playback stop?</summary><p>Device battery management may restrict the app. Set KSRAudio to unrestricted or exclude it from battery optimization, and allow notifications.</p></details>
-      <details><summary>Why did saved files disappear after uninstalling the app?</summary><p>Files in app-internal storage may be deleted when the app is uninstalled or app data is cleared. Before uninstalling, share, export, or copy important files to another location.</p></details>
+
+<body id="top">
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.en.html">
+        <span class="brand-mark">K</span>
+        <span>KSRAudio</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Support navigation">
+        <a href="#faq">FAQ</a>
+        <a href="privacy.en.html">Privacy Policy</a>
+        <a href="index.en.html">Home</a>
+        <a href="support.html?lang=ko">한국어</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Customer Support</span>
+        <h1>KSRAudio Support</h1>
+        <p>
+          Use the guidance below if you experience a problem with playback, audio editing, vocal removal, overdubbing, SMB/FTP/SFTP connections, saving result files, or sharing.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="mailto:support@ksrrang.com">
+            Email support
+          </a>
+          <a class="button button-secondary" href="#faq">
+            Frequently asked questions
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <div class="quick-grid">
+          <a class="quick-card" href="#playback-support">
+            <div class="quick-icon">▶</div>
+            <h2>Playback issues</h2>
+            <p>What to check when a file will not open or playback is interrupted.</p>
+            <span class="quick-link">View details →</span>
+          </a>
+
+          <a class="quick-card" href="#remote-support">
+            <div class="quick-icon">NET</div>
+            <h2>Remote-server connections</h2>
+            <p>How to investigate SMB, FTP, and SFTP connection and network failures.</p>
+            <span class="quick-link">View details →</span>
+          </a>
+
+          <a class="quick-card" href="#storage-support">
+            <div class="quick-icon">SAVE</div>
+            <h2>Saving and sharing</h2>
+            <p>Where edited results are saved and how to share them through KakaoTalk or another app.</p>
+            <span class="quick-link">View details →</span>
+          </a>
+        </div>
+
+        <article><h2>Before contacting support</h2><ol><li>Update KSRAudio to the latest version.</li><li>Fully close and reopen the app.</li><li>Check free storage space and the network connection.</li><li>Check media, microphone, and notification permissions in Android Settings.</li><li>For remote servers, verify that the same account works from another app or computer.</li></ol><p class="notice"><strong>Keep your originals:</strong> back up important source files before editing, vocal removal, or overdubbing.</p></article>
+
+        <article id="playback-support"><h2>Playback troubleshooting</h2><ol><li>Check whether the file plays in another player.</li><li>Confirm that it is complete and not damaged.</li><li>Check KSRAudio's audio and video access permission.</li><li>Re-select files obtained through external storage or a file-provider app.</li><li>For remote media, check Wi-Fi signal and server response.</li><li>Close other apps before playing high-resolution or high-bitrate media.</li></ol><p class="notice"><strong>About supported formats:</strong> Files with the same extension can use different codecs. For a file-specific issue, include the extension, codecs, and approximate size in your report.</p><p class="back-link"><a href="#top">Back to top ↑</a></p></article>
+
+        <article id="remote-support"><h2>SMB, FTP, and SFTP connection troubleshooting</h2><p>First check the server address, port, account information, and network connection. Never send a password or private key to customer support.</p><h3>Checks for every protocol</h3><ul><li>Confirm that the phone is on a network that can reach the server address.</li><li>Make sure the protocol has not been entered twice in the server address.</li><li>Recheck the username, password, port number, and remote path.</li><li>Check whether the server firewall or router blocks the port.</li><li>Test the same account with another client on a computer.</li></ul><h3>SMB</h3><ul><li>Check the share name and the account's read permission.</li><li>Check the SMB version and authentication method used by the server.</li><li>On a local network, try the server IP address instead of its name.</li></ul><h3>FTP and SFTP</h3><ul><li>FTP and SFTP are different protocols, so select the correct one.</li><li>Typical ports are FTP 21 and SFTP 22, but the server configuration takes priority.</li><li>For an SFTP private key, check the key format and its registration on the server.</li></ul><p class="back-link"><a href="#top">Back to top ↑</a></p></article>
+
+        <article id="storage-support"><h2>Saving and sharing</h2><p>Edits with speed, pitch, or EQ changes, vocal-removal results, and overdubs are stored in app-internal storage.</p><h3>Managing saved files</h3><ul><li>Find results in the app's saved-files or file-management screen.</li><li>A task can fail when storage is low, so make sufficient space available.</li><li>Uninstalling the app or clearing app data may also delete internal files.</li><li>Back up important results separately by sharing or exporting them.</li></ul><h3>Sharing through KakaoTalk or another app</h3><ol><li>Select a saved result in KSRAudio.</li><li>Tap Share.</li><li>Choose KakaoTalk, email, cloud storage, or another destination.</li><li>Select the recipient or save location in that app.</li></ol><p class="notice"><strong>If sharing fails:</strong> the file may exceed the receiving app's transfer limit. Save a smaller file, or upload it to cloud storage and share a link.</p><p class="back-link"><a href="#top">Back to top ↑</a></p></article>
+
+        <article id="faq"><h2>Frequently asked questions</h2>
+      <details><summary>Why won't a media file open?</summary><div class="answer"><p>It may be damaged, use a codec or container unsupported by the device, or lack a valid Android access grant. Test it in another player and check that file-access permission is allowed.</p><p>For a file selected through external storage or a file manager, Android's access permission may expire, in which case the file must be selected again.</p></div></details>
+      <details><summary>Where are edited files stored?</summary><div class="answer"><p>Edits, vocal-removal results, and overdubs are kept in KSRAudio's internal storage. Export important files before uninstalling or clearing app data.</p></div></details>
+      <details><summary>Can I send a saved file through KakaoTalk or to another device?</summary><div class="answer"><p>Yes. Select the saved file and use Share to send it to KakaoTalk, email, cloud storage, or another app that supports Android sharing. If the file is too large for the destination, use cloud storage or another transfer method.</p></div></details>
+      <details><summary>Why can't I connect to an SMB server?</summary><div class="answer"><ul><li>Confirm that the phone and SMB server are on the same reachable network.</li><li>Check the address, share name, username, and password.</li><li>Confirm that the account has read permission for the share.</li><li>Check that the router or server firewall does not block SMB.</li><li>Check the server's supported SMB version and security settings.</li></ul></div></details>
+      <details><summary>Why can't I connect to an FTP or SFTP server?</summary><div class="answer"><ul><li>Confirm the protocol choice because FTP and SFTP are different.</li><li>Check the address and port. FTP commonly uses 21 and SFTP 22, but server settings may differ.</li><li>Check the username, password, or private key.</li><li>Check whether the mobile network or router firewall blocks that port.</li><li>Review the server connection log for the authentication failure.</li></ul></div></details>
+      <details><summary>Why does remote playback stop?</summary><div class="answer"><p>Network speed, server response, Wi-Fi signal, and media bitrate can cause interruptions. Use a stable connection and reduce other network traffic.</p></div></details>
+      <details><summary>Why does vocal removal take a long time?</summary><div class="answer"><p>It is compute intensive. Duration depends on file length, device performance, battery-saving settings, and temperature. Keep the app open and ensure sufficient battery.</p></div></details>
+      <details><summary>Why is my microphone not recorded?</summary><div class="answer"><ul><li>Allow KSRAudio's microphone permission in Android Settings.</li><li>Check whether another recording or calling app is using the microphone.</li><li>A Bluetooth headset may change which microphone is selected.</li><li>Test the device microphone in another recording app.</li></ul></div></details>
+      <details><summary>Why does background playback stop?</summary><div class="answer"><p>Device battery management may restrict the app. Set KSRAudio to unrestricted or exclude it from battery optimization, and allow notifications.</p></div></details>
+      <details><summary>Why did saved files disappear after uninstalling the app?</summary><div class="answer"><p>Files in app-internal storage may be deleted when the app is uninstalled or app data is cleared. Before uninstalling, share, export, or copy important files to another location.</p></div></details>
     </article>
-    <article><h2>How to contact us by email</h2><p>Include the following so we can investigate quickly:</p><ul><li>KSRAudio app version</li><li>Phone manufacturer and model</li><li>Android version</li><li>Affected feature and exact reproduction steps</li><li>Error message or screenshot</li><li>File type and approximate size</li><li>For an SMB, FTP, or SFTP issue, the protocol and port number</li></ul><p class="note"><strong>Do not send sensitive information:</strong> Never include a remote-server password, private key, complete connection URL, national identification number, financial information, or other sensitive data.</p></article>
-    <article><h2>Customer-support contact</h2><h3>KSRRang · KSRAudio Support</h3><p>Email: <a href="mailto:support@ksrrang.com">support@ksrrang.com</a><br>Location: Seoul, Republic of Korea</p><a class="button" href="mailto:support@ksrrang.com?subject=KSRAudio%20Support">Compose support email</a><p>Response time may vary. For app error reports, detailed reproduction information helps us investigate the problem.</p></article>
+
+        <article><h2>How to contact us by email</h2><p>Include the following so we can investigate quickly:</p><ul><li>KSRAudio app version</li><li>Phone manufacturer and model</li><li>Android version</li><li>Affected feature and exact reproduction steps</li><li>Error message or screenshot</li><li>File type and approximate size</li><li>For an SMB, FTP, or SFTP issue, the protocol and port number</li></ul><p class="success"><strong>Do not send sensitive information:</strong> Never include a remote-server password, private key, complete connection URL, national identification number, financial information, or other sensitive data.</p></article>
+
+        <article><h2>Customer-support contact</h2><div class="contact-box"><h3>KSRRang · KSRAudio Support</h3><p>Email: <a href="mailto:support@ksrrang.com">support@ksrrang.com</a><br>Location: Seoul, Republic of Korea</p><a class="button button-primary" href="mailto:support@ksrrang.com?subject=KSRAudio%20Support">Compose support email</a></div><p>Response time may vary. For app error reports, detailed reproduction information helps us investigate the problem.</p></article>
+      </div>
+    </section>
   </main>
-  <footer><div class="wrap foot"><div>© 2026 KSRRang</div><div><a href="index.en.html">Home</a> · <a href="privacy.en.html">Privacy Policy</a> · <a href="support.html?lang=ko">한국어</a></div></div></footer>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>KSRRang · KSRAudio</strong><br />
+        © 2026 KSRRang. All rights reserved.
+      </div>
+
+      <div class="footer-links">
+        <a href="index.en.html">Home</a>
+        <a href="privacy.en.html">Privacy Policy</a>
+        <a href="mailto:support@ksrrang.com">Email support</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
