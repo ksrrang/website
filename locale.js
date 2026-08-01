@@ -23,12 +23,12 @@
   }
 
   if (requested === "ko" || requested === "en") {
-    sessionStorage.setItem("ksraudio-language", requested);
+    sessionStorage.setItem("ksrrangaudio-language", requested);
     moveTo(requested);
     return;
   }
 
-  const saved = sessionStorage.getItem("ksraudio-language");
+  const saved = sessionStorage.getItem("ksrrangaudio-language");
   if (saved === "ko" || saved === "en") {
     moveTo(saved);
     return;
@@ -49,7 +49,7 @@
       const language = locationData.success !== false && locationData.country_code === "KR"
         ? "ko"
         : "en";
-      sessionStorage.setItem("ksraudio-language", language);
+      sessionStorage.setItem("ksrrangaudio-language", language);
       moveTo(language);
     })
     .catch(() => moveTo(fallback))
