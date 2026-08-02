@@ -2,6 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const translations = new Map([
   ["<html lang=\"ko\">", "<html lang=\"en\">"],
+  ['<link rel="canonical" href="https://ksrrang.com/ko/" />', '<link rel="canonical" href="https://ksrrang.com/en/" />'],
   ["KSRRang(케이에스알랑)의 KSRRangAudio는 오디오 및 동영상 파일의 오디오 재생·편집, 속도·피치·10밴드 EQ 조절, 보컬 제거, 오버더빙과 원격 파일 처리를 지원하는 안드로이드 앱입니다.", "KSRRangAudio by KSRRang is an Android app for playing and editing audio and audio tracks from video files, with speed, pitch, a 10-band EQ, vocal removal, overdubbing, and remote-file processing."],
   ["KSRRangAudio는 오디오 및 동영상 파일의 오디오를 재생·편집하고, 속도·피치·10밴드 EQ 조절, 보컬 제거, 오버더빙, SMB·FTP·SFTP 원격 파일 처리와 결과물 공유를 지원하는 안드로이드 오디오 앱입니다.", "KSRRangAudio is an Android audio app for playing and editing audio and audio tracks from video files, with speed, pitch, a 10-band EQ, vocal removal, overdubbing, SMB/FTP/SFTP remote-file processing, and result sharing."],
   ["KSRRangAudio | 케이에스알랑 오디오 재생·편집 앱", "KSRRangAudio | Audio Playback and Editing App by KSRRang"],

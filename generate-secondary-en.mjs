@@ -34,6 +34,7 @@ const privacyCurrentEn = await readFile("en/privacy.html", "utf8");
 let privacyEn = replaceArticles(privacyKo, privacyCurrentEn);
 privacyEn = replaceAll(privacyEn, [
   ['<html lang="ko">', '<html lang="en">'],
+  ['<link rel="canonical" href="https://ksrrang.com/ko/privacy.html" />', '<link rel="canonical" href="https://ksrrang.com/en/privacy.html" />'],
   ["KSRRang(케이에스알랑)의 KSRRangAudio 개인정보처리방침입니다. 미디어, 마이크, 원격 서버, 저장 및 공유 기능의 데이터 처리 방식을 안내합니다.", "KSRRangAudio Privacy Policy covering media, microphone use, remote servers, storage, and sharing."],
   ["KSRRangAudio 개인정보처리방침입니다. 미디어 파일, 마이크, SMB·FTP·SFTP 접속정보, 저장 및 공유 기능의 데이터 처리 방식을 안내합니다.", "KSRRangAudio Privacy Policy covering media files, microphone use, SMB/FTP/SFTP credentials, storage, and sharing."],
   ["개인정보처리방침 | KSRRang(케이에스알랑) KSRRangAudio", "Privacy Policy | KSRRangAudio by KSRRang"],
@@ -70,6 +71,7 @@ const supportCurrentEn = await readFile("en/support.html", "utf8");
 let supportEn = replaceArticles(supportKo, supportCurrentEn);
 supportEn = replaceAll(supportEn, [
   ['<html lang="ko">', '<html lang="en">'],
+  ['<link rel="canonical" href="https://ksrrang.com/ko/support.html" />', '<link rel="canonical" href="https://ksrrang.com/en/support.html" />'],
   ["KSRRang(케이에스알랑)의 KSRRangAudio 고객지원 페이지입니다. 재생, 편집, 보컬 제거, 원격 연결, 파일 저장과 공유 관련 도움말을 제공합니다.", "KSRRangAudio support from KSRRang for playback, editing, vocal removal, remote connections, file storage, and sharing."],
   ["KSRRangAudio 고객지원 페이지입니다. 재생, 편집, 보컬 제거, 오버더빙, SMB·FTP·SFTP 연결, 파일 저장과 공유 관련 도움말을 제공합니다.", "KSRRangAudio support for playback, editing, vocal removal, overdubbing, SMB/FTP/SFTP connections, file storage, and sharing."],
   ["KSRRangAudio 고객지원 페이지입니다. 재생, 편집, 보컬 제거, 오버더빙, SMB·FTP·SFTP 연결, 파일 저장과 공유 문제 해결 방법을 안내합니다.", "KSRRangAudio support for playback, editing, vocal removal, overdubbing, SMB/FTP/SFTP connections, file storage, and sharing."],
