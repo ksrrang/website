@@ -11,7 +11,7 @@ const translations = new Map([
   [">사용 흐름<", ">Workflow<"],
   [">소개<", ">About<"],
   [">문의<", ">Contact<"],
-  ["index.en.html?lang=en", "index.html?lang=ko"],
+  ["../en/index.html?lang=en", "../ko/index.html?lang=ko"],
   [">English<", ">한국어<"],
   ["재생부터 편집, 보컬 제거와 오버더빙까지", "From playback and editing to vocal removal and overdubbing"],
   ["KSRRangAudio는 오디오 파일과 동영상 파일에 포함된 오디오를 처리할 수 있는\n            안드로이드 오디오 앱입니다. 속도와 피치를 변경하고, 10밴드 EQ로 음색을\n            조절하며, 보컬 제거와 오버더빙 녹음 기능까지 하나의 앱에서 제공합니다.\n            또한 SMB, FTP, SFTP 서버의 오디오 및 동영상 파일을 직접 불러와 재생하고,\n            편집하거나 보컬 제거 작업을 수행할 수 있습니다. 생성된 편집본, 보컬 제거본,\n            오버더빙 결과물은 앱 내부 저장소에 저장되며 공유 기능을 통해 카카오톡 등\n            다른 앱이나 기기로 전달할 수 있습니다.", "KSRRangAudio is an Android audio app that can process audio files and audio tracks contained in video files. Change speed and pitch, shape the sound with a 10-band EQ, remove vocals, and record overdubs—all in one app. You can also open audio and video files directly from SMB, FTP, and SFTP servers to play, edit, or remove vocals. Created edits, vocal-removal results, and overdubs are stored in app-internal storage and can be sent to KakaoTalk, another app, or another device through sharing."],
@@ -55,13 +55,13 @@ const translations = new Map([
   ["KSRRangAudio는 음악 감상, 노래와 악기 연습, 반주 제작, 오디오 편집 및\n              녹음을 하나의 앱에서 처리할 수 있도록 개발되고 있습니다.", "KSRRangAudio is being developed so that music listening, vocal and instrument practice, backing-track creation, audio editing, and recording can all be handled in one app."],
   ["다양한 미디어 형식을 지원하며, SMB, FTP, SFTP를 통한 원격 파일 재생과\n              편집도 제공합니다. 편집본, 보컬 제거 결과물, 오버더빙 생성물은 앱 내부\n              저장소에 저장되며, 공유 기능을 이용해 카카오톡 등 다른 앱이나 기기로\n              전달할 수 있습니다.", "It supports a variety of media formats and provides remote-file playback and editing through SMB, FTP, and SFTP. Edits, vocal-removal results, and overdubs are stored in app-internal storage and can be sent to KakaoTalk, another app, or another device through sharing."],
   ["일부 기능과 지원 형식은 기기, Android 버전 및 앱 버전에 따라 달라질\n              수 있습니다.", "Some features and supported formats may vary by device, Android version, and app version."],
-  ["privacy.html", "privacy.en.html"],
-  ["support.html", "support.en.html"],
+  ["privacy.html", "../en/privacy.html"],
+  ["support.html", "../en/support.html"],
   [">개인정보처리방침<", ">Privacy Policy<"],
   [">고객지원<", ">Support<"]
 ]);
 
-let html = await readFile("index.html", "utf8");
+let html = await readFile("ko/index.html", "utf8");
 for (const [source, translated] of translations) {
   if (!html.includes(source)) continue;
   html = html.replaceAll(source, translated);
@@ -83,4 +83,4 @@ if (/[\uac00-\ud7af]/u.test(html.replaceAll("한국어", ""))) {
   throw new Error(`Untranslated Korean text remains: ${remaining.join(" | ")}`);
 }
 
-await writeFile("index.en.html", html);
+await writeFile("en/index.html", html);

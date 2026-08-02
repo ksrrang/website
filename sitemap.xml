@@ -2,27 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://ksrrang.com/</loc>
+    <loc>https://ksrrang.com/ko/</loc>
   </url>
 
   <url>
-    <loc>https://ksrrang.com/index.en.html</loc>
+    <loc>https://ksrrang.com/en/</loc>
   </url>
 
   <url>
-    <loc>https://ksrrang.com/privacy.html</loc>
+    <loc>https://ksrrang.com/ko/privacy.html</loc>
   </url>
 
   <url>
-    <loc>https://ksrrang.com/privacy.en.html</loc>
+    <loc>https://ksrrang.com/en/privacy.html</loc>
   </url>
 
   <url>
-    <loc>https://ksrrang.com/support.html</loc>
+    <loc>https://ksrrang.com/ko/support.html</loc>
   </url>
 
   <url>
-    <loc>https://ksrrang.com/support.en.html</loc>
+    <loc>https://ksrrang.com/en/support.html</loc>
   </url>
 
 </urlset>

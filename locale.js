@@ -2,22 +2,18 @@
   const params = new URLSearchParams(location.search);
   const requested = params.get("lang");
   const pageLanguage = document.documentElement.lang.toLowerCase().startsWith("ko") ? "ko" : "en";
-  const pairs = {
-    "index.html": "index.en.html",
-    "privacy.html": "privacy.en.html",
-    "support.html": "support.en.html",
-    "index.en.html": "index.html",
-    "privacy.en.html": "privacy.html",
-    "support.en.html": "support.html"
-  };
-
-  const currentPage = location.pathname.split("/").pop() || "index.html";
+  const pathParts = location.pathname.split("/").filter(Boolean);
+  const currentPage = pathParts.at(-1) || "index.html";
+  const currentDirectory = pathParts.at(-2);
+  const isLanguageRouter = currentDirectory !== "ko" && currentDirectory !== "en";
 
   function moveTo(language) {
-    if (language === pageLanguage) return;
-    const target = pairs[currentPage];
-    if (!target) return;
-    const url = new URL(target, location.href);
+    if (!isLanguageRouter && language === pageLanguage) return;
+    const page = ["index.html", "privacy.html", "support.html"].includes(currentPage)
+      ? currentPage
+      : "index.html";
+    const siteRoot = new URL(isLanguageRouter ? "./" : "../", location.href);
+    const url = new URL(`${language}/${page}`, siteRoot);
     url.hash = location.hash;
     location.replace(url);
   }

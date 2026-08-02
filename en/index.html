@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="KSRRangAudio is an Android audio app for playing and editing audio and audio tracks from video files, with speed, pitch, a 10-band EQ, vocal removal, overdubbing, SMB/FTP/SFTP remote-file processing, and result sharing."
+  />
+  <meta name="theme-color" content="#111827" />
+
+  <meta property="og:title" content="KSRRangAudio | Audio Playback, Editing, and Vocal Removal" />
+  <meta
+    property="og:description"
+    content="Adjust speed, pitch, and a 10-band EQ, remove vocals, save edits, and record overdubs in one app."
+  />
+  <meta property="og:type" content="website" />
+
+  <title>KSRRangAudio | Audio Playback, Editing, and Vocal Removal</title>
+  <script src="../locale.js"></script>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-dark: #111827;
+      --text: #182033;
+      --muted: #667085;
+      --primary: #5b5ce2;
+      --primary-dark: #4546c8;
+      --border: #e5e7eb;
+      --accent: #e9eafe;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.88);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.85);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg, #6567e8, #8b5cf6);
+      box-shadow: 0 9px 22px rgba(91, 92, 226, 0.28);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 104px 0 84px;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(139, 92, 246, 0.18), transparent 26%),
+        radial-gradient(circle at 20% 25%, rgba(91, 92, 226, 0.13), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: center;
+      gap: 68px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border: 1px solid #dfe1ff;
+      border-radius: 999px;
+      color: var(--primary-dark);
+      background: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(2.55rem, 6vw, 4.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 21px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      font-weight: 750;
+      transition: 0.2s ease;
+    }
+
+    .button-primary {
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 12px 24px rgba(91, 92, 226, 0.25);
+    }
+
+    .button-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      border-color: var(--border);
+      background: #fff;
+    }
+
+    .button-secondary:hover {
+      border-color: #c8c9f8;
+      color: var(--primary);
+    }
+
+    .app-preview {
+      position: relative;
+      width: min(390px, 100%);
+      margin-inline: auto;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 34px;
+      background: rgba(17, 24, 39, 0.96);
+      box-shadow: var(--shadow);
+    }
+
+    .preview-screen {
+      min-height: 490px;
+      padding: 28px;
+      border-radius: 24px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 75% 20%, rgba(139, 92, 246, 0.45), transparent 28%),
+        linear-gradient(145deg, #202946, #111827 66%);
+    }
+
+    .preview-label {
+      color: #c7cbff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .preview-title {
+      margin: 16px 0 4px;
+      font-size: 2rem;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .preview-subtitle {
+      margin: 0;
+      color: #b6bdcc;
+    }
+
+    .waveform {
+      display: flex;
+      height: 112px;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 42px 0 28px;
+    }
+
+    .waveform span {
+      width: 5px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #b7a4ff, #6467e8);
+    }
+
+    .waveform span:nth-child(1) { height: 28px; }
+    .waveform span:nth-child(2) { height: 48px; }
+    .waveform span:nth-child(3) { height: 78px; }
+    .waveform span:nth-child(4) { height: 54px; }
+    .waveform span:nth-child(5) { height: 96px; }
+    .waveform span:nth-child(6) { height: 66px; }
+    .waveform span:nth-child(7) { height: 106px; }
+    .waveform span:nth-child(8) { height: 58px; }
+    .waveform span:nth-child(9) { height: 84px; }
+    .waveform span:nth-child(10) { height: 42px; }
+    .waveform span:nth-child(11) { height: 70px; }
+    .waveform span:nth-child(12) { height: 32px; }
+
+    .control-card {
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .control-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 9px 0;
+      color: #c9cfdb;
+    }
+
+    .control-row strong {
+      color: #fff;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 38px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      margin: 15px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      min-height: 240px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.045);
+    }
+
+    .feature-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 24px;
+      border-radius: 15px;
+      color: var(--primary);
+      background: var(--accent);
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .workflow {
+      background: var(--surface-dark);
+      color: #fff;
+    }
+
+    .workflow .section-heading p {
+      color: #aeb6c7;
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .workflow-card {
+      padding: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .workflow-number {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      margin-bottom: 24px;
+      border-radius: 50%;
+      color: #141728;
+      background: #bec0ff;
+      font-weight: 900;
+    }
+
+    .workflow-card h3 {
+      margin: 0 0 10px;
+    }
+
+    .workflow-card p {
+      margin: 0;
+      color: #aeb6c7;
+    }
+
+    .about-panel {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 42px;
+      padding: 46px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .about-panel h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -0.04em;
+    }
+
+    .about-panel p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+
+    .site-footer {
+      padding: 34px 0;
+      color: #9aa3b4;
+      background: #0b1020;
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .about-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 74px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .workflow-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .app-preview {
+        margin-top: 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .nav {
+        min-height: 64px;
+      }
+
+      .nav-links a:not(:last-child) {
+        display: none;
+      }
+
+      .hero {
+        padding: 62px 0 60px;
+      }
+
+      section {
+        padding: 66px 0;
+      }
+
+      .feature-grid,
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-panel {
+        padding: 30px 24px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="KSRRangAudio home">
+        <span class="brand-mark">K</span>
+        <span>KSRRangAudio</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#about">About</a>
+        <a href="mailto:support@ksrrang.com">Contact</a>
+        <a href="../ko/index.html?lang=ko">한국어</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Android Audio Player & Editor</span>
+          <h1>From playback and editing to vocal removal and overdubbing</h1>
+
+          <p class="hero-copy">
+            KSRRangAudio is an Android audio app that can process audio files and audio tracks contained in video files. Change speed and pitch, shape the sound with a 10-band EQ, remove vocals, and record overdubs—all in one app. You can also open audio and video files directly from SMB, FTP, and SFTP servers to play, edit, or remove vocals. Created edits, vocal-removal results, and overdubs are stored in app-internal storage and can be sent to KakaoTalk, another app, or another device through sharing.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#features">Explore features</a>
+            <a class="button button-secondary" href="mailto:support@ksrrang.com">
+              Contact support
+            </a>
+          </div>
+        </div>
+
+        <div class="app-preview" aria-label="KSRRangAudio feature preview">
+          <div class="preview-screen">
+            <span class="preview-label">KSRRangAudio</span>
+            <h2 class="preview-title">Your audio,<br />your way.</h2>
+            <p class="preview-subtitle">Play · Edit · Separate · Record</p>
+
+            <div class="waveform" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+            </div>
+
+            <div class="control-card">
+              <div class="control-row">
+                <span>Speed</span>
+                <strong>100%</strong>
+              </div>
+              <div class="control-row">
+                <span>Pitch</span>
+                <strong>0 semitone</strong>
+              </div>
+              <div class="control-row">
+                <span>Equalizer</span>
+                <strong>10 bands</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Key KSRRangAudio features</h2>
+          <p>
+            Play media from local storage or SMB, FTP, and SFTP servers, edit it into the sound you want, save it as a new audio file, and share it with another app or device.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">▶</div>
+            <h3>Audio and video-track playback</h3>
+            <p>
+              Open, play, and process both audio files and audio tracks contained in video files.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">↕</div>
+            <h3>Speed and pitch adjustment</h3>
+            <p>
+              Adjust playback speed and pitch independently for music practice, listening, content creation, and other purposes.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">EQ</div>
+            <h3>10-band equalizer</h3>
+            <p>
+              Fine-tune ten frequency bands from bass to treble to create the sound you want.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">AI</div>
+            <h3>Vocal removal and saving</h3>
+            <p>
+              Reduce or remove vocal components to create accompaniment-focused audio and save it as a separate file.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">⇩</div>
+            <h3>Save edited results</h3>
+            <p>
+              Save audio with speed, pitch, and EQ settings as a new file for use in other apps or on other devices.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">●</div>
+            <h3>Overdub recording</h3>
+            <p>
+              Record vocals or instruments through the microphone while listening to a backing track, then combine both into one audio file.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">♫</div>
+            <h3>Audio player</h3>
+            <p>
+              Conveniently use essential player controls including play, pause, seek, and repeat.
+            </p>
+          </article>
+
+
+          <article class="feature-card">
+            <div class="feature-icon">NET</div>
+            <h3>SMB, FTP, and SFTP remote-file support</h3>
+            <p>
+              Open audio and video files from remote SMB, FTP, and SFTP servers for playback, speed/pitch/EQ editing, and vocal removal.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">SAVE</div>
+            <h3>Store results in app-internal storage</h3>
+            <p>
+              Edited audio, vocal-removal results, and overdubs are stored in app-internal storage and can be managed separately from other files.
+            </p>
+          </article>
+
+
+          <article class="feature-card">
+            <div class="feature-icon">SHARE</div>
+            <h3>File sharing</h3>
+            <p>
+              Share edits, vocal-removal results, and overdubs stored in app-internal storage with KakaoTalk, email, another app, or another device.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="workflow">
+      <div class="container">
+        <div class="section-heading">
+          <h2>A simple workflow</h2>
+          <p>Select a local or remote-server file, adjust it to the sound you want, and save it in app-internal storage.</p>
+        </div>
+
+        <div class="workflow-grid">
+          <article class="workflow-card">
+            <span class="workflow-number">1</span>
+            <h3>Choose a file</h3>
+            <p>Open an audio or video file from local storage or an SMB, FTP, or SFTP server.</p>
+          </article>
+
+          <article class="workflow-card">
+            <span class="workflow-number">2</span>
+            <h3>Adjust the sound</h3>
+            <p>Set speed, pitch, and the 10-band EQ to the values you want.</p>
+          </article>
+
+          <article class="workflow-card">
+            <span class="workflow-number">3</span>
+            <h3>AI and recording</h3>
+            <p>Run vocal removal or overdub recording as needed.</p>
+          </article>
+
+          <article class="workflow-card">
+            <span class="workflow-number">4</span>
+            <h3>Play or save</h3>
+            <p>Save the processed result in app-internal storage, then share it with KakaoTalk, another app, or another device.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-panel">
+          <div>
+            <span class="eyebrow">About KSRRangAudio</span>
+            <h2>A freer way to work with audio</h2>
+          </div>
+
+          <div>
+            <p>
+              KSRRangAudio is being developed so that music listening, vocal and instrument practice, backing-track creation, audio editing, and recording can all be handled in one app.
+            </p>
+            <p>
+              It supports a variety of media formats and provides remote-file playback and editing through SMB, FTP, and SFTP. Edits, vocal-removal results, and overdubs are stored in app-internal storage and can be sent to KakaoTalk, another app, or another device through sharing.
+            </p>
+            <p>
+              Some features and supported formats may vary by device, Android version, and app version.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>KSRRang · KSRRangAudio</strong><br />
+        Android audio player and editor
+      </div>
+
+      <div class="footer-links">
+        <a href="../en/privacy.html">Privacy Policy</a>
+        <a href="../en/support.html">Support</a>
+        <a href="mailto:support@ksrrang.com">support@ksrrang.com</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
