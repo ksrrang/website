@@ -2,7 +2,10 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const translations = new Map([
   ["<html lang=\"ko\">", "<html lang=\"en\">"],
+  ["KSRRang(케이에스알랑)의 KSRRangAudio는 오디오 및 동영상 파일의 오디오 재생·편집, 속도·피치·10밴드 EQ 조절, 보컬 제거, 오버더빙과 원격 파일 처리를 지원하는 안드로이드 앱입니다.", "KSRRangAudio by KSRRang is an Android app for playing and editing audio and audio tracks from video files, with speed, pitch, a 10-band EQ, vocal removal, overdubbing, and remote-file processing."],
   ["KSRRangAudio는 오디오 및 동영상 파일의 오디오를 재생·편집하고, 속도·피치·10밴드 EQ 조절, 보컬 제거, 오버더빙, SMB·FTP·SFTP 원격 파일 처리와 결과물 공유를 지원하는 안드로이드 오디오 앱입니다.", "KSRRangAudio is an Android audio app for playing and editing audio and audio tracks from video files, with speed, pitch, a 10-band EQ, vocal removal, overdubbing, SMB/FTP/SFTP remote-file processing, and result sharing."],
+  ["KSRRangAudio | 케이에스알랑 오디오 재생·편집 앱", "KSRRangAudio | Audio Playback and Editing App by KSRRang"],
+  ["KSRRangAudio | 케이에스알랑 오디오 앱", "KSRRangAudio | Audio App by KSRRang"],
   ["KSRRangAudio | 오디오 재생·편집·보컬 제거", "KSRRangAudio | Audio Playback, Editing, and Vocal Removal"],
   ["속도·피치·10밴드 EQ 조절, 보컬 제거, 편집본 저장, 오버더빙 녹음을 하나의 앱에서 제공합니다.", "Adjust speed, pitch, and a 10-band EQ, remove vocals, save edits, and record overdubs in one app."],
   ["aria-label=\"KSRRangAudio 홈\"", "aria-label=\"KSRRangAudio home\""],
@@ -13,6 +16,7 @@ const translations = new Map([
   [">문의<", ">Contact<"],
   ["../en/index.html?lang=en", "../ko/index.html?lang=ko"],
   [">English<", ">한국어<"],
+  ["KSRRang(케이에스알랑) Android Audio Player &amp; Editor", "KSRRang Android Audio Player &amp; Editor"],
   ["재생부터 편집, 보컬 제거와 오버더빙까지", "From playback and editing to vocal removal and overdubbing"],
   ["KSRRangAudio는 오디오 파일과 동영상 파일에 포함된 오디오를 처리할 수 있는\n            안드로이드 오디오 앱입니다. 속도와 피치를 변경하고, 10밴드 EQ로 음색을\n            조절하며, 보컬 제거와 오버더빙 녹음 기능까지 하나의 앱에서 제공합니다.\n            또한 SMB, FTP, SFTP 서버의 오디오 및 동영상 파일을 직접 불러와 재생하고,\n            편집하거나 보컬 제거 작업을 수행할 수 있습니다. 생성된 편집본, 보컬 제거본,\n            오버더빙 결과물은 앱 내부 저장소에 저장되며 공유 기능을 통해 카카오톡 등\n            다른 앱이나 기기로 전달할 수 있습니다.", "KSRRangAudio is an Android audio app that can process audio files and audio tracks contained in video files. Change speed and pitch, shape the sound with a 10-band EQ, remove vocals, and record overdubs—all in one app. You can also open audio and video files directly from SMB, FTP, and SFTP servers to play, edit, or remove vocals. Created edits, vocal-removal results, and overdubs are stored in app-internal storage and can be sent to KakaoTalk, another app, or another device through sharing."],
   [">기능 살펴보기<", ">Explore features<"],
@@ -58,7 +62,8 @@ const translations = new Map([
   ["privacy.html", "../en/privacy.html"],
   ["support.html", "../en/support.html"],
   [">개인정보처리방침<", ">Privacy Policy<"],
-  [">고객지원<", ">Support<"]
+  [">고객지원<", ">Support<"],
+  ["KSRRang(케이에스알랑) · KSRRangAudio", "KSRRang · KSRRangAudio"]
 ]);
 
 let html = await readFile("ko/index.html", "utf8");
@@ -76,7 +81,11 @@ html = html
     "Run vocal removal or overdub recording as needed."
   );
 
-if (/[\uac00-\ud7af]/u.test(html.replaceAll("한국어", ""))) {
+const koreanAllowedInMetadata = html
+  .replaceAll("한국어", "")
+  .replaceAll("케이에스알랑오디오", "")
+  .replaceAll("케이에스알랑", "");
+if (/[\uac00-\ud7af]/u.test(koreanAllowedInMetadata)) {
   const remaining = [...html.matchAll(/[^\n<>]*[\uac00-\ud7af][^\n<>]*/gu)]
     .map((match) => match[0].trim())
     .filter((text) => text !== "한국어");
