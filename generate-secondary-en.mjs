@@ -39,7 +39,7 @@ privacyEn = replaceAll(privacyEn, [
   ["KSRRangAudio 개인정보처리방침입니다. 미디어 파일, 마이크, SMB·FTP·SFTP 접속정보, 저장 및 공유 기능의 데이터 처리 방식을 안내합니다.", "KSRRangAudio Privacy Policy covering media files, microphone use, SMB/FTP/SFTP credentials, storage, and sharing."],
   ["개인정보처리방침 | KSRRang(케이에스알랑) KSRRangAudio", "Privacy Policy | KSRRangAudio by KSRRang"],
   ["개인정보처리방침 | KSRRangAudio", "Privacy Policy | KSRRangAudio"],
-  ["../en/privacy.html?lang=en", "../ko/privacy.html?lang=ko"],
+  ['../en/privacy.html" data-language="en"', '../ko/privacy.html" data-language="ko"'],
   [">홈으로<", ">Home<"],
   [">English<", ">한국어<"],
   ["<h1>개인정보처리방침</h1>", "<h1>Privacy Policy</h1>"],
@@ -55,8 +55,8 @@ privacyEn = replaceAll(privacyEn, [
   ["편집본은 앱 내부 저장소에 저장되며 이용자가 선택한 앱으로 공유할 수 있습니다.", "Edited results are stored in app-internal storage and can be shared with an app selected by the user."],
   ["중요 안내", "Important"],
   ["KSRRangAudio는 이용자가 선택한 미디어 파일과 원격 서버의 콘텐츠를 회사 서버에\n          자동 업로드하지 않습니다. SMB·FTP·SFTP 사용 시 데이터는 이용자의 기기와\n          이용자가 직접 지정한 서버 사이에서 전송됩니다.", "KSRRangAudio does not automatically upload user-selected media or remote-server content to servers operated by the Company. With SMB, FTP, or SFTP, data is transferred between the user's device and the server the user specifies."],
-  ["index.html", "../en/index.html"],
-  ["support.html", "../en/support.html"],
+  ["index.html", "index.html"],
+  ["support.html", "support.html"],
   [">홈<", ">Home<"],
   [">고객지원<", ">Support<"],
   ["이메일 문의", "Email"]
@@ -77,7 +77,7 @@ supportEn = replaceAll(supportEn, [
   ["KSRRangAudio 고객지원 페이지입니다. 재생, 편집, 보컬 제거, 오버더빙, SMB·FTP·SFTP 연결, 파일 저장과 공유 문제 해결 방법을 안내합니다.", "KSRRangAudio support for playback, editing, vocal removal, overdubbing, SMB/FTP/SFTP connections, file storage, and sharing."],
   ["고객지원 | KSRRang(케이에스알랑) KSRRangAudio", "Support | KSRRangAudio by KSRRang"],
   ['aria-label="지원 페이지 메뉴"', 'aria-label="Support navigation"'],
-  ["../en/support.html?lang=en", "../ko/support.html?lang=ko"],
+  ['../en/support.html" data-language="en"', '../ko/support.html" data-language="ko"'],
   [">자주 묻는 질문<", ">FAQ<"],
   [">개인정보처리방침<", ">Privacy Policy<"],
   [">홈으로<", ">Home<"],
@@ -93,8 +93,8 @@ supportEn = replaceAll(supportEn, [
   ["SMB, FTP, SFTP 접속 실패와 네트워크 문제를 확인합니다.", "How to investigate SMB, FTP, and SFTP connection and network failures."],
   ["저장 및 공유", "Saving and sharing"],
   ["편집 결과의 저장 위치와 카카오톡 등으로 공유하는 방법을 안내합니다.", "Where edited results are saved and how to share them through KakaoTalk or another app."],
-  ["index.html", "../en/index.html"],
-  ["privacy.html", "../en/privacy.html"],
+  ["index.html", "index.html"],
+  ["privacy.html", "privacy.html"],
   [">홈<", ">Home<"]
 ]);
 supportEn = supportEn

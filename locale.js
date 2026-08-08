@@ -7,6 +7,14 @@
   const currentDirectory = pathParts.at(-2);
   const isLanguageRouter = currentDirectory !== "ko" && currentDirectory !== "en";
 
+  addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-language]").forEach((link) => {
+      link.addEventListener("click", () => {
+        sessionStorage.setItem("ksrrangaudio-language", link.dataset.language);
+      });
+    });
+  });
+
   function moveTo(language) {
     if (!isLanguageRouter && language === pageLanguage) return;
     const page = ["index.html", "privacy.html", "support.html"].includes(currentPage)
