@@ -1,10 +1,11 @@
 (() => {
   const params = new URLSearchParams(location.search);
   const requested = params.get("lang");
-  const pageLanguage = document.documentElement.lang.toLowerCase().startsWith("ko") ? "ko" : "en";
   const pathParts = location.pathname.split("/").filter(Boolean);
-  const currentPage = pathParts.at(-1) || "index.html";
-  const currentDirectory = pathParts.at(-2);
+  const lastPathPart = pathParts.at(-1);
+  const isDirectoryIndex = lastPathPart === "ko" || lastPathPart === "en";
+  const currentPage = isDirectoryIndex ? "index.html" : (lastPathPart || "index.html");
+  const currentDirectory = isDirectoryIndex ? lastPathPart : pathParts.at(-2);
   const isLanguageRouter = currentDirectory !== "ko" && currentDirectory !== "en";
 
   addEventListener("DOMContentLoaded", () => {
@@ -15,13 +16,17 @@
     });
   });
 
+  // Language pages must remain directly crawlable. Automatic country-based
+  // routing is performed only by the root language router.
+  if (!isLanguageRouter) return;
+
   function moveTo(language) {
-    if (!isLanguageRouter && language === pageLanguage) return;
     const page = ["index.html", "privacy.html", "support.html"].includes(currentPage)
       ? currentPage
       : "index.html";
     const siteRoot = new URL(isLanguageRouter ? "./" : "../", location.href);
-    const url = new URL(`${language}/${page}`, siteRoot);
+    const target = page === "index.html" ? `${language}/` : `${language}/${page}`;
+    const url = new URL(target, siteRoot);
     url.hash = location.hash;
     location.replace(url);
   }
