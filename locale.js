@@ -43,24 +43,6 @@
     return;
   }
 
-  const fallback = Intl.DateTimeFormat().resolvedOptions().timeZone === "Asia/Seoul"
-    ? "ko"
-    : "en";
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 1800);
-
-  fetch("https://ipwho.is/?fields=success,country_code", { signal: controller.signal })
-    .then((response) => {
-      if (!response.ok) throw new Error("Location lookup failed");
-      return response.json();
-    })
-    .then((locationData) => {
-      const language = locationData.success !== false && locationData.country_code === "KR"
-        ? "ko"
-        : "en";
-      sessionStorage.setItem("ksrrangaudio-language", language);
-      moveTo(language);
-    })
-    .catch(() => moveTo(fallback))
-    .finally(() => clearTimeout(timer));
+  // Keep the crawlable language selector visible on a visitor's first visit.
+  // Subsequent visits can use the language explicitly selected by the visitor.
 })();
