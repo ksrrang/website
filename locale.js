@@ -21,11 +21,11 @@
   if (!isLanguageRouter) return;
 
   function moveTo(language) {
-    const page = ["index.html", "privacy.html", "support.html"].includes(currentPage)
+    const page = ["index.html", "privacy.html", "support.html", "vocal-remover.html"].includes(currentPage)
       ? currentPage
       : "index.html";
     const siteRoot = new URL(isLanguageRouter ? "./" : "../", location.href);
-    const target = page === "index.html" ? `${language}/` : `${language}/${page}`;
+    const target = `${language}/${page}`;
     const url = new URL(target, siteRoot);
     url.hash = location.hash;
     location.replace(url);
